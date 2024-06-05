@@ -22,7 +22,7 @@ class RegisterController extends Controller
 		$user = $this->create($request->all());
 
 		// Optionally, log the user in after registration
-		// auth()->login($user);
+		auth()->login($user);
 
 		return redirect()->route('login');
 	}

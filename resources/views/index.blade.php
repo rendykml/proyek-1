@@ -44,7 +44,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
 
-      <a href="{{ url('/register') }}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a>
+      <a href="{{ url('/register') }}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Register or</span> Login</a>
     </div>
   </header>
 

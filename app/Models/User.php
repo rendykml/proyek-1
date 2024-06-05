@@ -11,6 +11,17 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public function getRoleNameAttribute()
+    {
+        $roles = [
+            1 => 'Admin',
+            2 => 'Pasien',
+            3 => 'Dokter'
+        ];
+
+        return $roles[$this->id_role] ?? 'Unknown';
+    }
+
     /**
      * The attributes that are mass assignable.
      *
