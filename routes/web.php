@@ -24,8 +24,9 @@ Route::get('pasien/dashboard', [PasienController::class, 'dashboard'])->name('pa
 
 // Route untuk Admin
 Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth');
-Route::get('admin/dashboard/addpasien', [AdminController::class, 'showAddPasienForm'])->name('admin.tambah-pasien')->middleware('auth');
-Route::post('admin/dashboard/addpasien', [AdminController::class, 'addPasien'])->name('addPasien')->middleware('auth');
+Route::get('admin/dashboard/addpengguna', [AdminController::class, 'showAddPenggunaForm'])->name('admin.tambah-pengguna')->middleware('auth');
+Route::post('admin/dashboard/addpengguna', [AdminController::class, 'addPengguna'])->name('addPengguna')->middleware('auth');
+Route::get('admin/dashboard/pasien', [PasienController::class, 'getDataPasien'])->name('admin.pasien-dashboard')->middleware('auth');
 
 
 // Route untuk Dokter

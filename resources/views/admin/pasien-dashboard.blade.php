@@ -11,7 +11,7 @@
 			<h3 class="page-title">
 				<span class="page-title-icon bg-gradient-primary text-white me-2">
 					<i class="mdi mdi-home"></i>
-				</span> Pengguna
+				</span> Pasien
 			</h3>
 			<nav aria-label="breadcrumb">
 				<ul class="breadcrumb">
@@ -30,35 +30,35 @@
 			<div class="col-12 grid-margin">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">Data Pengguna</h4>
+						<h4 class="card-title">Data Pasien</h4>
 						<div class="table-responsive">
 							<table class="table">
 								<thead>
 									<tr>
 										<th> No </th>
 										<th> Nama </th>
-										<th> Username </th>
 										<th> Email </th>
 										<th> Jenis Kelamin </th>
 										<th> Tanggal Lahir </th>
 										<th> Alamat </th>
 										<th> No. Telepon </th>
-										<th> Tipe Pengguna </th>
+										<th>Riwayat Medis</th>
+										<th>Asuransi</th>
 										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($users as $index => $user)
+									@foreach($pasiens as $index => $pasien)
 									<tr>
 										<td>{{ $index + 1 }}</td>
-										<td>{{ $user->name }}</td>
-										<td>{{ $user->username }}</td>
-										<td>{{ $user->email }}</td>
-										<td>{{ $user->jenis_kelamin }}</td>
-										<td>{{ $user->tanggal_lahir }}</td>
-										<td>{{ $user->alamat }}</td>
-										<td>{{ $user->no_telepon }}</td>
-										<td>{{ $user->tipe_pengguna }}</td>
+										<td>{{ $pasien->name }}</td>
+										<td>{{ $pasien->email }}</td>
+										<td>{{ $pasien->jenis_kelamin }}</td>
+										<td>{{ $pasien->tanggal_lahir }}</td>
+										<td>{{ $pasien->alamat }}</td>
+										<td>{{ $pasien->no_telepon }}</td>
+										<td>{{ $pasien->riwayat_medis }}</td>
+										<td>{{ $pasien->asuransi }}</td>
 										<td><button class="add btn btn-primary">Edit</button>
 											<button class="add btn btn-danger">Delete</button>
 										</td>

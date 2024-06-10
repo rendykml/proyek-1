@@ -19,19 +19,19 @@ class LoginController extends Controller
 		// validator request data email dan password (validasi)
 		$this->validator($request->all())->validate();
 
-		// kondisi untuk menentukan id_role dari user email yang digunakan
-		if (Auth::attempt($request->only('email', 'password'))) {
+		// kondisi untuk menentukan tipe pengguna dari user email yang digunakan
+		if (Auth::attempt($request->only('username', 'email', 'password'))) {
 			$user = Auth::user();
 
-			// cek id_role
-			switch ($user->id_role) {
-				case 1:
+			// cek tipe pengguna
+			switch ($user->tipe_pengguna) {
+				case "Admin":
 					return redirect()->route('admin.dashboard');
 					break;
-				case 2:
+				case "Pasien":
 					return redirect()->route('pasien.dashboard');
 					break;
-				case 3:
+				case "Dokter":
 					return redirect()->route('dokter.dashboard');
 					break;
 				default:
