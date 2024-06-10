@@ -23,7 +23,7 @@
 		</div>
 		<div class="row">
 			<div class="card-body">
-				<a href="{{ route('admin.tambah-pengguna') }}" class="btn btn-success">Tambah Data Pengguna</a>
+				<a href="{{ route('admin.tambah-pasien') }}" class="btn btn-success">Tambah Data Pasien</a>
 			</div>
 		</div>
 		<div class="row">

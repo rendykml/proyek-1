@@ -59,8 +59,13 @@
 										<td>{{ $user->alamat }}</td>
 										<td>{{ $user->no_telepon }}</td>
 										<td>{{ $user->tipe_pengguna }}</td>
-										<td><button class="add btn btn-primary">Edit</button>
-											<button class="add btn btn-danger">Delete</button>
+										<td>
+											<a href="{{ route('admin.edit-pengguna', $user->id) }}" class="btn btn-primary">Edit</a>
+											<form action="{{ route('deletePengguna', $user->id) }}" method="POST" style="display:inline;">
+												@csrf
+												@method('DELETE')
+												<button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')">Delete</button>
+											</form>
 										</td>
 									</tr>
 									@endforeach

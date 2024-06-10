@@ -24,7 +24,7 @@ class User extends Authenticatable
 		'jenis_kelamin',
 		'tanggal_lahir',
 		'alamat',
-		'no_telp',
+		'no_telepon',
 		'tipe_pengguna',
     ];
 
