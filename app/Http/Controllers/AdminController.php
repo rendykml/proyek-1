@@ -15,9 +15,20 @@ class AdminController extends Controller
 		return view('admin.dashboard', compact('users'));
 	}
 
+	public function dashboardDokter()
+	{
+		$users = User::where('id_role', 3)->get();
+		return view('admin.dashboard-dokter', compact('users'));
+	}
+
 	public function showAddPasienForm()
 	{
 		return view('admin.tambah-pasien');
+	}
+
+	public function showAddDokterForm()
+	{
+		return view('admin.tambah-dokter');
 	}
 
 	public function addPasien(Request $request)
@@ -27,6 +38,15 @@ class AdminController extends Controller
 		$user = $this->create($request->all());
 
 		return redirect()->route('admin.dashboard')->with('success', 'Pasien berhasil ditambahkan');
+	}
+
+	public function addDokter(Request $request)
+	{
+		$this->validator($request->all())->validate();
+
+		$user = $this->create($request->all());
+
+		return redirect()->route('admin.dashboard-dokter')->with('success', 'Dokter berhasil ditambahkan');
 	}
 
 	protected function validator(array $data)
