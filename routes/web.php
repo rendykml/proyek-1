@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\DokterController;
-use App\Models\Pasien;
+use App\Http\Controllers\JadwalController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {   
@@ -25,9 +25,9 @@ Route::get('pasien/dashboard', [PasienController::class, 'dashboard'])->name('pa
 
 // Route untuk Admin
 Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth');
-Route::get('admin/dashboard-dokter', [AdminController::class, 'dashboardDokter'])->name('admin.dashboard-dokter')->middleware('auth');
-Route::get('admin/dashboard/adddokter', [AdminController::class, 'showAddDokterForm'])->name('admin.tambah-dokter')->middleware('auth');
-Route::post('admin/dashboard/adddokter', [AdminController::class, 'addDokter'])->name('addDokter')->middleware('auth');
+Route::get('admin/dashboard-dokter', [DokterController::class, 'dashboardDokter'])->name('admin.dashboard-dokter')->middleware('auth');
+Route::get('admin/dashboard/adddokter', [DokterController::class, 'showAddDokterForm'])->name('admin.tambah-dokter')->middleware('auth');
+Route::post('admin/dashboard/adddokter', [DokterController::class, 'addDokter'])->name('addDokter')->middleware('auth');
 Route::get('admin/dashboard/addpengguna', [AdminController::class, 'showAddPenggunaForm'])->name('admin.tambah-pengguna')->middleware('auth');
 Route::post('admin/dashboard/addpengguna', [AdminController::class, 'addPengguna'])->name('addPengguna')->middleware('auth');
 Route::get('admin/dashboard/pasien', [PasienController::class, 'getDataPasien'])->name('admin.pasien-dashboard')->middleware('auth');
@@ -39,7 +39,7 @@ Route::delete('admin/dashboard/deletepengguna/{id}', [AdminController::class, 'd
 Route::get('admin/dashboard/editpasien/{id}', [PasienController::class, 'showEditPasienForm'])->name('admin.edit-pasien')->middleware('auth');
 Route::put('admin/dashboard/editpasien/{id}', [PasienController::class, 'updatePasien'])->name('updatePasien')->middleware('auth');
 Route::delete('admin/dashboard/deletepasien/{id}', [PasienController::class, 'deletePasien'])->name('deletePasien')->middleware('auth');
-
+Route::get('admin/dashboard/jadwaldokter', [JadwalController::class, 'getDataJadwalDokter'])->name('admin.dashboard-jadwal')->middleware('auth');
 
 // Route untuk Dokter
 Route::get('dokter/dashboard', [DokterController::class, 'dashboard'])->name('dokter.dashboard')->middleware('auth');

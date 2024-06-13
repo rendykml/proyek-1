@@ -38,17 +38,29 @@
                             <th> No </th>
                             <th> Nama </th>
                             <th> Email </th>
-                            <th> User </th>
-                            <th>Action</th>
+                            <th> Jenis Kelamin </th>
+                            <th> Tanggal Lahir </th>
+                            <th> Alamat </th>
+                            <th> No. Telepon </th>
+                            <th> Spesialisasi </th>
+                            <th> Kualifikasi </th>
+                            <th> Pengalaman </th>
+                            <th> Action </th>
                           </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $index => $user)
+                        @foreach($doctors as $index => $dokter)
                         <tr>
-                          <td>{{ $index + 1 }}</td>
-                          <td>{{ $user->name }}</td>
-                          <td>{{ $user->email }}</td>
-                          <td>{{ $user->tipe_pengguna }}</td>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $dokter->name }}</td>
+                        <td>{{ $dokter->email }}</td>
+                        <td>{{ $dokter->jenis_kelamin }}</td>
+                        <td>{{ $dokter->tanggal_lahir }}</td>
+                        <td>{{ $dokter->alamat }}</td>
+                        <td>{{ $dokter->no_telepon }}</td>
+                        <td>{{ $dokter->spesialisasi }}</td>
+                        <td>{{ $dokter->kualifikasi }}</td>
+                        <td>{{ $dokter->pengalaman }}</td>
                           <td><button class="add btn btn-primary">Edit</button>
                           <button class="add btn btn-danger">Delete</button></td>
                         </tr>
