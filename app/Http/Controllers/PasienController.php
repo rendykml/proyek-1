@@ -85,4 +85,12 @@ class PasienController extends Controller
 		// Redirect ke halaman dashboard dengan pesan sukses
 		return redirect()->route('admin.pasien-dashboard')->with('success', 'Data pasien berhasil diperbarui');
 	}
+
+	public function deletePasien($id)
+	{
+		$pasien = Pasien::findOrFail($id);
+		$pasien->delete();
+
+		return redirect()->route('admin.pasien-dashboard')->with('success', 'Data pasien berhasil dihapus');
+	}
 }

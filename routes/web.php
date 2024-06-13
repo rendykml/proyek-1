@@ -38,6 +38,7 @@ Route::put('admin/dashboard/editpengguna/{id}', [AdminController::class, 'update
 Route::delete('admin/dashboard/deletepengguna/{id}', [AdminController::class, 'deletePengguna'])->name('deletePengguna')->middleware('auth');
 Route::get('admin/dashboard/editpasien/{id}', [PasienController::class, 'showEditPasienForm'])->name('admin.edit-pasien')->middleware('auth');
 Route::put('admin/dashboard/editpasien/{id}', [PasienController::class, 'updatePasien'])->name('updatePasien')->middleware('auth');
+Route::delete('admin/dashboard/deletepasien/{id}', [PasienController::class, 'deletePasien'])->name('deletePasien')->middleware('auth');
 
 
 // Route untuk Dokter

@@ -61,7 +61,11 @@
 										<td>{{ $pasien->asuransi }}</td>
 										<td>
 										<a href="{{ route('admin.edit-pasien', $pasien->pasien_id) }}" class="btn btn-primary">Edit</a>
-											<button class="add btn btn-danger">Delete</button>
+										<form action="{{ route('deletePasien', $pasien->pasien_id) }}" method="POST" style="display:inline;">
+												@csrf
+												@method('DELETE')
+												<button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus pasien ini?')">Delete</button>
+											</form>
 										</td>
 									</tr>
 									@endforeach
