@@ -11,7 +11,7 @@
 			<h3 class="page-title">
 				<span class="page-title-icon bg-gradient-primary text-white me-2">
 					<i class="mdi mdi-home"></i>
-				</span> Pasien
+				</span> Jadwal Dokter
 			</h3>
 			<nav aria-label="breadcrumb">
 				<ul class="breadcrumb">
@@ -23,49 +23,39 @@
 		</div>
 		<div class="row">
 			<div class="card-body">
-				<a href="{{ route('admin.tambah-pasien') }}" class="btn btn-success">Tambah Data Pasien</a>
+				<a href="" class="btn btn-success">Tambah Data Jadwal Dokter</a>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-12 grid-margin">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">Data Pasien</h4>
+						<h4 class="card-title">Data Jadwal Dokter</h4>
 						<div class="table-responsive">
 							<table class="table">
 								<thead>
 									<tr>
 										<th> No </th>
-										<th> Nama </th>
-										<th> Email </th>
-										<th> Jenis Kelamin </th>
-										<th> Tanggal Lahir </th>
-										<th> Alamat </th>
-										<th> No. Telepon </th>
-										<th> Riwayat Medis </th>
-										<th> Asuransi </th>
+										<th> Nama Dokter </th>
+										<th> Spesialisasi  </th>
+										<th> Hari </th>
+										<th> Tanggal dan Jam Mulai </th>
+										<th> Tanggal dan Jam Selesai </th>
 										<th> Action </th>
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($pasiens as $index => $pasien)
+									@foreach($jadwals as $index => $jadwal)
 									<tr>
 										<td>{{ $index + 1 }}</td>
-										<td>{{ $pasien->name }}</td>
-										<td>{{ $pasien->email }}</td>
-										<td>{{ $pasien->jenis_kelamin }}</td>
-										<td>{{ $pasien->tanggal_lahir }}</td>
-										<td>{{ $pasien->alamat }}</td>
-										<td>{{ $pasien->no_telepon }}</td>
-										<td>{{ $pasien->riwayat_medis }}</td>
-										<td>{{ $pasien->asuransi }}</td>
+										<td>{{ $jadwal->doctor_name }}</td>
+										<td>{{ $jadwal->spesialisasi }}</td>
+										<td>{{ $jadwal->hari }}</td>
+										<td>{{ $jadwal->jam_mulai }}</td>
+										<td>{{ $jadwal->jam_selesai }}</td>
 										<td>
-										<a href="{{ route('admin.edit-pasien', $pasien->pasien_id) }}" class="btn btn-primary">Edit</a>
-										<form action="{{ route('deletePasien', $pasien->pasien_id) }}" method="POST" style="display:inline;">
-												@csrf
-												@method('DELETE')
-												<button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus pasien ini?')">Delete</button>
-											</form>
+										<button class="add btn btn-primary">Edit</button>
+                                        <button class="add btn btn-danger">Delete</button>
 										</td>
 									</tr>
 									@endforeach

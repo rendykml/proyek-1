@@ -35,5 +35,11 @@
 					<i class="mdi mdi-home menu-icon"></i>
 				</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{ route('admin.dashboard-jadwal') }}">
+					<span class="menu-title">jadwal Dokter</span>
+					<i class="mdi mdi-home menu-icon"></i>
+				</a>
+			</li>
 		</ul>
 	</nav>
