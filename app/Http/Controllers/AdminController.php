@@ -49,7 +49,7 @@ class AdminController extends Controller
 		return redirect()->route('admin.dashboard-dokter')->with('success', 'Dokter berhasil ditambahkan');
 	}
 
-	protected function validator(array $data)
+	protected function validator(array $data, $userId = null)
 	{
 		$rules = [
 			'name' => ['required', 'string', 'max:255'],
