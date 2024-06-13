@@ -48,7 +48,7 @@
                           <td>{{ $index + 1 }}</td>
                           <td>{{ $user->name }}</td>
                           <td>{{ $user->email }}</td>
-                          <td>{{ $user->role_name }}</td>
+                          <td>{{ $user->tipe_pengguna }}</td>
                           <td><button class="add btn btn-primary">Edit</button>
                           <button class="add btn btn-danger">Delete</button></td>
                         </tr>

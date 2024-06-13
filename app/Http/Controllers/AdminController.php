@@ -17,7 +17,7 @@ class AdminController extends Controller
 
 	public function dashboardDokter()
 	{
-		$users = User::where('id_role', 3)->get();
+		$users = User::where('tipe_pengguna', 'Dokter')->get();
 		return view('admin.dashboard-dokter', compact('users'));
 	}
 
