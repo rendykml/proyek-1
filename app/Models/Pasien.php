@@ -11,6 +11,8 @@ class Pasien extends Model
 
 	protected $table = 'pasien';
 
+	protected $primaryKey = 'pasien_id';
+
 	public $timestamps = false;
 
 	protected $fillable = [
@@ -18,4 +20,9 @@ class Pasien extends Model
 		'riwayat_medis',
 		'asuransi',
 	];
+
+	public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

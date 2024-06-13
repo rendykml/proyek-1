@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\DokterController;
+use App\Models\Pasien;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {   
@@ -26,7 +27,6 @@ Route::get('pasien/dashboard', [PasienController::class, 'dashboard'])->name('pa
 Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth');
 Route::get('admin/dashboard-dokter', [AdminController::class, 'dashboardDokter'])->name('admin.dashboard-dokter')->middleware('auth');
 Route::get('admin/dashboard/adddokter', [AdminController::class, 'showAddDokterForm'])->name('admin.tambah-dokter')->middleware('auth');
-Route::post('admin/dashboard/addpasien', [AdminController::class, 'addPasien'])->name('addPasien')->middleware('auth');
 Route::post('admin/dashboard/adddokter', [AdminController::class, 'addDokter'])->name('addDokter')->middleware('auth');
 Route::get('admin/dashboard/addpengguna', [AdminController::class, 'showAddPenggunaForm'])->name('admin.tambah-pengguna')->middleware('auth');
 Route::post('admin/dashboard/addpengguna', [AdminController::class, 'addPengguna'])->name('addPengguna')->middleware('auth');
@@ -36,6 +36,8 @@ Route::post('admin/dashboard/addpasien', [PasienController::class, 'addPasien'])
 Route::get('admin/dashboard/editpengguna/{id}', [AdminController::class, 'showEditPenggunaForm'])->name('admin.edit-pengguna')->middleware('auth');
 Route::put('admin/dashboard/editpengguna/{id}', [AdminController::class, 'updatePengguna'])->name('updatePengguna')->middleware('auth');
 Route::delete('admin/dashboard/deletepengguna/{id}', [AdminController::class, 'deletePengguna'])->name('deletePengguna')->middleware('auth');
+Route::get('admin/dashboard/editpasien/{id}', [PasienController::class, 'showEditPasienForm'])->name('admin.edit-pasien')->middleware('auth');
+Route::put('admin/dashboard/editpasien/{id}', [PasienController::class, 'updatePasien'])->name('updatePasien')->middleware('auth');
 
 
 // Route untuk Dokter

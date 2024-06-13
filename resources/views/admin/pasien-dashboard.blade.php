@@ -59,7 +59,8 @@
 										<td>{{ $pasien->no_telepon }}</td>
 										<td>{{ $pasien->riwayat_medis }}</td>
 										<td>{{ $pasien->asuransi }}</td>
-										<td><button class="add btn btn-primary">Edit</button>
+										<td>
+										<a href="{{ route('admin.edit-pasien', $pasien->pasien_id) }}" class="btn btn-primary">Edit</a>
 											<button class="add btn btn-danger">Delete</button>
 										</td>
 									</tr>

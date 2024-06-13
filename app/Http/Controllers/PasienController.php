@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Pasien;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class PasienController extends Controller
 {
@@ -19,7 +20,7 @@ class PasienController extends Controller
 		$pasiens = DB::table('pasien')
 			->join('users', 'pasien.user_id', '=', 'users.id')
 			->where('users.tipe_pengguna', 'Pasien')
-			->select('users.name', 'users.email', 'users.jenis_kelamin', 'users.alamat', 'users.no_telepon', 'users.tanggal_lahir', 'pasien.riwayat_medis', 'pasien.asuransi')
+			->select('users.name', 'users.email', 'users.jenis_kelamin', 'users.alamat', 'users.no_telepon', 'users.tanggal_lahir', 'pasien.pasien_id', 'pasien.riwayat_medis', 'pasien.asuransi')
 			->get();
 
 		return view('admin.pasien-dashboard', compact('pasiens'));
@@ -29,6 +30,21 @@ class PasienController extends Controller
 	{
 		$pasiens = User::where('tipe_pengguna', 'Pasien')->get();
 		return view('admin.tambah-pasien', compact('pasiens'));
+	}
+
+	protected function validator(array $data, $isUpdate = false)
+	{
+		$rules = [
+			'riwayat_medis' => ['required', 'string'],
+			'asuransi' => ['required', 'string', 'max:100'],
+		];
+	
+		if (!$isUpdate) {
+			// Aturan tambahan untuk create
+			$rules['user_id'] = ['required', 'integer', 'unique:pasien,user_id'];
+		}
+	
+		return Validator::make($data, $rules);
 	}
 
 	public function addPasien(Request $request)
@@ -42,5 +58,31 @@ class PasienController extends Controller
 		]);
 
 		return redirect()->route('admin.pasien-dashboard')->with('success', 'Data pasien berhasil ditambahkan');
+	}
+
+	public function showEditPasienForm($pasienId)
+	{
+		$pasien = Pasien::with('user')->findOrFail($pasienId);
+
+		$pasien = Pasien::findOrFail($pasienId);
+		return view('admin.edit-pasien', compact('pasien'));
+	}
+
+	public function updatePasien(Request $request, $pasienId)
+	{
+		// Temukan pasien berdasarkan ID
+		$pasien = Pasien::findOrFail($pasienId);
+
+		// Validasi data tanpa user_id karena tidak perlu diubah
+		$this->validator($request->all(), $pasienId, true)->validate();
+
+		// Ambil data yang diinginkan untuk diupdate
+		$data = $request->only(['riwayat_medis', 'asuransi']);
+
+		// Update data pasien
+		$pasien->update($data);
+
+		// Redirect ke halaman dashboard dengan pesan sukses
+		return redirect()->route('admin.pasien-dashboard')->with('success', 'Data pasien berhasil diperbarui');
 	}
 }
