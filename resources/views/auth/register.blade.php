@@ -34,6 +34,17 @@
 										@endif
 									</div>
 									<div class="mb-3">
+										<label class="form-label">Jenis Kelamin</label>
+										<select class="form-control form-control-lg" id="gender" name="gender" required>
+											<option value="">Pilih Jenis Kelamin</option>
+											<option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Laki-laki</option>
+											<option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Perempuan</option>
+										</select>
+										@if ($errors->has('gender'))
+										<span class="text-danger">{{ $errors->first('gender') }}</span>
+										@endif
+									</div>
+									<div class="mb-3">
 										<label class="form-label">Password</label>
 										<input class="form-control form-control-lg" type="password" id="password" name="password" placeholder="Masukkan Password" />
 										@if ($errors->has('password'))
@@ -42,7 +53,7 @@
 									</div>
 									<div class="form-group">
 										<label for="password_confirmation">Confirm Password</label>
-										<input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+										<input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password">
 									</div>
 									<div class="d-grid gap-2 mt-3">
 										<button type="submit" class="btn btn-lg btn-primary">Buat Akun</button>
