@@ -54,7 +54,7 @@
 										<td>{{ $jadwal->jam_mulai }}</td>
 										<td>{{ $jadwal->jam_selesai }}</td>
 										<td>
-										<button class="add btn btn-primary">Edit</button>
+										<a href="{{ route('admin.edit-jadwal', $jadwal->jadwal_id) }}" class="btn btn-primary">Edit</a>
                                         <button class="add btn btn-danger">Delete</button>
 										</td>
 									</tr>

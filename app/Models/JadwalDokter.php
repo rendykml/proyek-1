@@ -24,6 +24,4 @@ class JadwalDokter extends Model
     {
         return $this->belongsTo(Dokter::class, 'doctor_id');
     }
-
-	
 }
