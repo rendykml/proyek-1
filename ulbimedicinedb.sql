@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Jun 2024 pada 18.19
--- Versi server: 10.4.28-MariaDB
--- Versi PHP: 8.2.4
+-- Generation Time: Jun 16, 2024 at 09:43 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ulbimedicinedb`
+-- Database: `laraveldb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `cache`
+-- Table structure for table `cache`
 --
 
 CREATE TABLE `cache` (
@@ -36,7 +36,7 @@ CREATE TABLE `cache` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `cache_locks`
+-- Table structure for table `cache_locks`
 --
 
 CREATE TABLE `cache_locks` (
@@ -48,7 +48,7 @@ CREATE TABLE `cache_locks` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `doctors`
+-- Table structure for table `doctors`
 --
 
 CREATE TABLE `doctors` (
@@ -60,7 +60,7 @@ CREATE TABLE `doctors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `doctors`
+-- Dumping data for table `doctors`
 --
 
 INSERT INTO `doctors` (`doctor_id`, `user_id`, `spesialisasi`, `kualifikasi`, `pengalaman`) VALUES
@@ -69,7 +69,7 @@ INSERT INTO `doctors` (`doctor_id`, `user_id`, `spesialisasi`, `kualifikasi`, `p
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `failed_jobs`
+-- Table structure for table `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -85,28 +85,29 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jadwal_dokter`
+-- Table structure for table `jadwal_dokter`
 --
 
 CREATE TABLE `jadwal_dokter` (
   `jadwal_id` int(11) NOT NULL,
   `doctor_id` int(11) NOT NULL,
   `hari` enum('senin','selasa','rabu','kamis','jumat','sabtu','minggu') NOT NULL,
-  `jam_mulai` datetime NOT NULL,
-  `jam_selesai` datetime NOT NULL
+  `jam_mulai` time NOT NULL,
+  `jam_selesai` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `jadwal_dokter`
+-- Dumping data for table `jadwal_dokter`
 --
 
 INSERT INTO `jadwal_dokter` (`jadwal_id`, `doctor_id`, `hari`, `jam_mulai`, `jam_selesai`) VALUES
-(1, 1, 'senin', '2024-06-13 17:57:22', '2024-06-13 22:57:22');
+(1, 1, 'senin', '17:57:22', '22:57:22'),
+(2, 1, 'senin', '14:42:00', '03:43:00');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jobs`
+-- Table structure for table `jobs`
 --
 
 CREATE TABLE `jobs` (
@@ -122,7 +123,7 @@ CREATE TABLE `jobs` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `job_batches`
+-- Table structure for table `job_batches`
 --
 
 CREATE TABLE `job_batches` (
@@ -141,7 +142,7 @@ CREATE TABLE `job_batches` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -151,7 +152,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -166,7 +167,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pasien`
+-- Table structure for table `pasien`
 --
 
 CREATE TABLE `pasien` (
@@ -177,7 +178,7 @@ CREATE TABLE `pasien` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `pasien`
+-- Dumping data for table `pasien`
 --
 
 INSERT INTO `pasien` (`pasien_id`, `user_id`, `riwayat_medis`, `asuransi`) VALUES
@@ -187,7 +188,7 @@ INSERT INTO `pasien` (`pasien_id`, `user_id`, `riwayat_medis`, `asuransi`) VALUE
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `password_reset_tokens`
+-- Table structure for table `password_reset_tokens`
 --
 
 CREATE TABLE `password_reset_tokens` (
@@ -199,7 +200,7 @@ CREATE TABLE `password_reset_tokens` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sessions`
+-- Table structure for table `sessions`
 --
 
 CREATE TABLE `sessions` (
@@ -212,10 +213,11 @@ CREATE TABLE `sessions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `sessions`
+-- Dumping data for table `sessions`
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('8uUvh4V1jkM8yhi2BOREeky5jF60r1ZgPw9n8ccF', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiNjZSV1FUc1ZLbkpQa0dqQUo5V3RBb21HODJpa2Nyb2sxWDJ4cWdKeiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQvamFkd2FsZG9rdGVyIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1718523729),
 ('l9vIzXzNUR8KCbUCNv7aDntDOH3MybfJRqnLnfZJ', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVU1IeDluYkRkUFd0dnpraDBzQkhpNzY1QVVvQlkxOXRXb1RkaGVPayI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO30=', 1718034006),
 ('oCSg2WqjPkmeashm4x08F0Mtrj6YPnIcito5gqzD', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 OPR/110.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoia0xGMGViZjhGdkV2Z3ZxWVg5WWt2RUh2WWtJN1ZjNElxQmRGOFMwYiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fX0=', 1718295245),
 ('PJ5TK4y0lEv3Qq2H5DH78u4w71jdFFkoMQsBmrg9', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 OPR/110.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVTdJSUhTY1JMblF1Yjc0NklSTFNnOFZvM3VNTHBoWXBNOE1SajhndiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1718027160),
@@ -225,7 +227,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -244,7 +246,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `updated_at`, `username`, `jenis_kelamin`, `tanggal_lahir`, `alamat`, `no_telepon`, `tipe_pengguna`) VALUES
@@ -259,72 +261,72 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `updated_a
 --
 
 --
--- Indeks untuk tabel `cache`
+-- Indexes for table `cache`
 --
 ALTER TABLE `cache`
   ADD PRIMARY KEY (`key`);
 
 --
--- Indeks untuk tabel `cache_locks`
+-- Indexes for table `cache_locks`
 --
 ALTER TABLE `cache_locks`
   ADD PRIMARY KEY (`key`);
 
 --
--- Indeks untuk tabel `doctors`
+-- Indexes for table `doctors`
 --
 ALTER TABLE `doctors`
   ADD PRIMARY KEY (`doctor_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indeks untuk tabel `failed_jobs`
+-- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indeks untuk tabel `jadwal_dokter`
+-- Indexes for table `jadwal_dokter`
 --
 ALTER TABLE `jadwal_dokter`
   ADD PRIMARY KEY (`jadwal_id`),
   ADD KEY `doctor_id` (`doctor_id`);
 
 --
--- Indeks untuk tabel `jobs`
+-- Indexes for table `jobs`
 --
 ALTER TABLE `jobs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `jobs_queue_index` (`queue`);
 
 --
--- Indeks untuk tabel `job_batches`
+-- Indexes for table `job_batches`
 --
 ALTER TABLE `job_batches`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pasien`
+-- Indexes for table `pasien`
 --
 ALTER TABLE `pasien`
   ADD PRIMARY KEY (`pasien_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indeks untuk tabel `password_reset_tokens`
+-- Indexes for table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
--- Indeks untuk tabel `sessions`
+-- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`),
@@ -332,54 +334,54 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `doctors`
+-- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
   MODIFY `doctor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `failed_jobs`
+-- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `jadwal_dokter`
+-- AUTO_INCREMENT for table `jadwal_dokter`
 --
 ALTER TABLE `jadwal_dokter`
-  MODIFY `jadwal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `jadwal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `jobs`
+-- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `pasien`
+-- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
   MODIFY `pasien_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;

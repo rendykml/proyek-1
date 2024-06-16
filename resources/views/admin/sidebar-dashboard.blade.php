@@ -37,7 +37,7 @@
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="{{ route('admin.dashboard-jadwal') }}">
-					<span class="menu-title">jadwal Dokter</span>
+					<span class="menu-title">Jadwal Dokter</span>
 					<i class="mdi mdi-home menu-icon"></i>
 				</a>
 			</li>

@@ -25,7 +25,7 @@ class JadwalController extends Controller
 
     public function showAddJadwalForm()
 	{
-		$jadwals = User::where('tipe_pengguna', 'Dokter')->get();
+		$jadwals = Dokter::with('user')->get();
 		return view('admin.tambah-jadwal', compact('jadwals'));
 	}
 
@@ -33,8 +33,8 @@ class JadwalController extends Controller
 	{
 		$rules = [
 			'hari' => ['required', 'enum'],
-			'jam_mulai' => ['required', 'datetime'],
-            'jam_selesai' => ['required', 'datetime'],
+			'jam_mulai' => ['required', 'time'],
+            'jam_selesai' => ['required', 'time'],
 		];
 	
 		if (!$isUpdate) {
