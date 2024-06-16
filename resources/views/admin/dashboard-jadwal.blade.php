@@ -23,7 +23,7 @@
 		</div>
 		<div class="row">
 			<div class="card-body">
-				<a href="" class="btn btn-success">Tambah Data Jadwal Dokter</a>
+				<a href="{{ route('admin.tambah-jadwal') }}" class="btn btn-success">Tambah Jadwal Dokter</a>
 			</div>
 		</div>
 		<div class="row">

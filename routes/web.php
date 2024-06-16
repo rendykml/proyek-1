@@ -40,6 +40,9 @@ Route::get('admin/dashboard/editpasien/{id}', [PasienController::class, 'showEdi
 Route::put('admin/dashboard/editpasien/{id}', [PasienController::class, 'updatePasien'])->name('updatePasien')->middleware('auth');
 Route::delete('admin/dashboard/deletepasien/{id}', [PasienController::class, 'deletePasien'])->name('deletePasien')->middleware('auth');
 Route::get('admin/dashboard/jadwaldokter', [JadwalController::class, 'getDataJadwalDokter'])->name('admin.dashboard-jadwal')->middleware('auth');
+Route::get('admin/dashboard/addjadwal', [JadwalController::class, 'showAddJadwalForm'])->name('admin.tambah-jadwal')->middleware('auth');
+Route::post('admin/dashboard/addjadwal', [JadwalController::class, 'addJadwal'])->name('addJadwal')->middleware('auth');
 
 // Route untuk Dokter
 Route::get('dokter/dashboard', [DokterController::class, 'dashboard'])->name('dokter.dashboard')->middleware('auth');
+
