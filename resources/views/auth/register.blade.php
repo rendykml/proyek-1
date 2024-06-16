@@ -34,14 +34,42 @@
 										@endif
 									</div>
 									<div class="mb-3">
-										<label class="form-label">Jenis Kelamin</label>
-										<select class="form-control form-control-lg" id="gender" name="gender" required>
+										<label class="form-label">Username</label>
+										<input class="form-control form-control-lg" type="text" id="username" name="username" value="{{ old('username') }}" placeholder="Masukkan Username" required />
+										@if ($errors->has('username'))
+										<span class="text-danger">{{ $errors->first('username') }}</span>
+										@endif
+									</div>
+									<div class="mb-3">
+										<label class="form-label" for="jenis_kelamin">Jenis Kelamin</label>
+										<select class="form-control form-control-lg" id="jenis_kelamin" name="jenis_kelamin">
 											<option value="">Pilih Jenis Kelamin</option>
-											<option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Laki-laki</option>
-											<option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Perempuan</option>
+											<option value="Laki-Laki">Laki-Laki</option>
+											<option value="Perempuan">Perempuan</option>
 										</select>
-										@if ($errors->has('gender'))
-										<span class="text-danger">{{ $errors->first('gender') }}</span>
+										@if ($errors->has('jenis_kelamin'))
+										<span class="text-danger">{{ $errors->first('jenis_kelamin') }}</span>
+										@endif
+									</div>
+									<div class="mb-3">
+										<label for="alamat" class="form-label">Alamat</label>
+										<textarea class="form-control" id="alamat" name="alamat" rows="3" required>{{ old('alamat') }}</textarea>
+										@error('alamat')
+										<span class="text-danger">{{ $message }}</span>
+										@enderror
+									</div>
+									<div class="mb-3">
+										<label class="form-label">Tanggal Lahir</label>
+										<input class="form-control form-control-lg" type="date" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" placeholder="Masukkan tanggal_lahir" required />
+										@if ($errors->has('tanggal_lahir'))
+										<span class="text-danger">{{ $errors->first('tanggal_lahir') }}</span>
+										@endif
+									</div>
+									<div class="mb-3">
+										<label class="form-label">No Telepon</label>
+										<input class="form-control form-control-lg" type="text" id="no_telepon" name="no_telepon" value="{{ old('no_telepon') }}" placeholder="Masukkan no_telepon" required />
+										@if ($errors->has('no_telepon'))
+										<span class="text-danger">{{ $errors->first('no_telepon') }}</span>
 										@endif
 									</div>
 									<div class="mb-3">

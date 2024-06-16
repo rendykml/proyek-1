@@ -22,7 +22,7 @@ class RegisterController extends Controller
 		$user = $this->create($request->all());
 
 		// Optionally, log the user in after registration
-		auth()->login($user);
+		// auth()->login($user);
 
 		return redirect()->route('login');
 	}
@@ -32,8 +32,12 @@ class RegisterController extends Controller
 		return Validator::make($data, [
 			'name' => ['required', 'string', 'max:255'],
 			'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+			'username' => ['required', 'string', 'max:255', 'unique:users'],
 			'password' => ['required', 'string', 'min:8', 'confirmed'],
-			'gender' => ['required', 'in:male,female'],
+			'jenis_kelamin' => ['required', 'in:Laki-Laki,Perempuan'],
+			'tanggal_lahir' => ['required', 'date'],
+			'alamat' => ['required', 'string'],
+			'no_telepon' => ['required', 'string', 'max:255'],
 		]);
 	}
 
@@ -42,8 +46,13 @@ class RegisterController extends Controller
 		return User::create([
 			'name' => $data['name'],
 			'email' => $data['email'],
+			'username' => $data['username'],
 			'password' => Hash::make($data['password']),
-			'gender' => $data['gender'],
+			'jenis_kelamin' => $data['jenis_kelamin'],
+			'tanggal_lahir' => $data['tanggal_lahir'],
+			'alamat' => $data['alamat'],
+			'no_telepon' => $data['no_telepon'],
+			'tipe_pengguna' => 'Pasien',
 		]);
 	}
 }
