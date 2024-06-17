@@ -55,8 +55,11 @@
 										<td>{{ $jadwal->jam_selesai }}</td>
 										<td>
 										<a href="{{ route('admin.edit-jadwal', $jadwal->jadwal_id) }}" class="btn btn-primary">Edit</a>
-                                        <button class="add btn btn-danger">Delete</button>
-										</td>
+										<form action="{{ route('deleteJadwal', $jadwal->jadwal_id) }}" method="POST" style="display:inline;">
+												@csrf
+												@method('DELETE')
+												<button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus jadwal dokter ini?')">Delete</button>
+											</form>
 									</tr>
 									@endforeach
 								</tbody>

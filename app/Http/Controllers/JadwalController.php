@@ -119,4 +119,12 @@ class JadwalController extends Controller
 			return redirect()->route('admin.edit-jadwal', $jadwalId)->with('error', 'Terjadi kesalahan saat memperbarui jadwal.');
 		}
 	}
+
+	public function deleteJadwal($jadwalId)
+	{
+		$jadwal = JadwalDokter::findOrFail($jadwalId);
+		$jadwal->delete();
+
+		return redirect()->route('admin.dashboard-jadwal')->with('success', 'Data pasien berhasil dihapus');
+	}
 }
