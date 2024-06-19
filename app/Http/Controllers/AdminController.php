@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\dokter;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -27,6 +28,29 @@ class AdminController extends Controller
 		$user = $this->create($request->all());
 
 		return redirect()->route('admin.dashboard')->with('success', 'Pengguna berhasil ditambahkan');
+	}
+
+	public function addDokter(Request $request)
+	{
+     
+		$users	 = User::create([
+			'nama' => $request->Nama,
+			'email' => $request->Email,
+			'password' => $request->Password,
+			'Confirm Password' => $request->password_confirmation,
+		]);
+
+
+		//$this->validator($request->all())->validate();
+
+		$dokter	 = dokter::create([
+			'user_id' => '12',
+			'spesialisasi' => $request->Spesialisasi,
+			'kualifikasi' => $request->Kualifikasi,
+			'pengalaman' => $request->Pengalaman,
+		]);
+
+		return redirect()->route('admin.dashboard-dokter')->with('success', 'Dokter berhasil ditambahkan');
 	}
 
 	protected function validator(array $data, $userId = null)

@@ -24,13 +24,15 @@ class DokterController extends Controller
 			->select('users.name', 'users.email', 'users.jenis_kelamin', 'users.alamat', 'users.no_telepon', 'users.tanggal_lahir', 'doctors.doctor_id', 'doctors.spesialisasi', 'doctors.kualifikasi', 'doctors.pengalaman')
 			->get();
 
+
 		return view('admin.dashboard-dokter', compact('doctors'));
 	}
 
 	// Halaman tambah data dokter di admin
 	public function showAddDokterForm()
 	{
-		return view('admin.tambah-dokter');
+		$dokter = User::where('tipe_pengguna', 'Dokter')->get();
+		return view('admin.tambah-dokter', compact('dokter'));
 	}
 
 	// validator body request insert dan update data
@@ -57,11 +59,48 @@ class DokterController extends Controller
 
 		Dokter::create([
 			'user_id' => $request->input('user_id'),
-			'spesialisasi' => $request->input('spesialisasi'),
-			'kualifikasi' => $request->input('kualifikasi'),
-			'pengalaman' => $request->input('pengalaman'),
+			'spesialisasi' => $request->input('Spesialisasi'),
+			'kualifikasi' => $request->input('Kualifikasi'),
+			'pengalaman' => $request->input('Pengalaman'),
 		]);
 
 		return redirect()->route('admin.dashboard-dokter')->with('success', 'Data dokter berhasil ditambahkan');
 	}
+
+	public function deleteDokter($doctor_id)
+	{
+		$dokter = Dokter::findOrFail($doctor_id);
+		$dokter->delete();
+
+		return redirect()->route('admin.dashboard-dokter')->with('success', 'Data dokter berhasil dihapus');
+	}
+
+    public function showEditDokterForm($doctor_id)
+	{
+		$doctors = Dokter::with('user')->findOrFail($doctor_id);
+
+		$doctors= Dokter::findOrFail($doctor_id);
+
+	
+		return view('admin.edit-dokter', compact('doctors'));
+	}
+    
+    public function updateDokter(Request $request, $doctors_Id)
+	{
+		// Temukan pasien berdasarkan ID
+		$doctors = Dokter::findOrFail($doctors_Id);
+
+		// Validasi data tanpa user_id karena tidak perlu diubah
+		$this->validator($request->all(), $doctors_Id, true)->validate();
+
+		// Ambil data yang diinginkan untuk diupdate
+		$data = $request->only(['Spesialisasi', 'Kualifikasi','Pengalaman']);
+
+		// Update data pasien
+		$doctors->update($data);
+
+		// Redirect ke halaman dashboard dengan pesan sukses
+		return redirect()->route('admin.dasboard-dokter')->with('success', 'Data dokter berhasil diperbarui');
+	}
+
 }

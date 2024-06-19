@@ -61,8 +61,14 @@
                         <td>{{ $dokter->spesialisasi }}</td>
                         <td>{{ $dokter->kualifikasi }}</td>
                         <td>{{ $dokter->pengalaman }}</td>
-                          <td><button class="add btn btn-primary">Edit</button>
-                          <button class="add btn btn-danger">Delete</button></td>
+                        <td>
+                          <a href="{{ route('admin.edit-dokter', $dokter->doctor_id) }}" class="btn btn-primary">Edit</a>
+											    <form action="{{ route('deleteDokter', $dokter->doctor_id) }}" method="POST" style="display:inline;">
+												  @csrf
+												  @method('DELETE')
+												  <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus dokter ini?')">Delete</button>
+											    </form>
+                        </td>
                         </tr>
                         @endforeach
                         </tbody>
