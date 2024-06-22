@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2024 at 09:43 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Waktu pembuatan: 22 Jun 2024 pada 12.59
+-- Versi server: 10.4.28-MariaDB
+-- Versi PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `laraveldb`
+-- Database: `ulbimedicinedb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cache`
+-- Struktur dari tabel `cache`
 --
 
 CREATE TABLE `cache` (
@@ -36,7 +36,7 @@ CREATE TABLE `cache` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cache_locks`
+-- Struktur dari tabel `cache_locks`
 --
 
 CREATE TABLE `cache_locks` (
@@ -48,7 +48,7 @@ CREATE TABLE `cache_locks` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `doctors`
+-- Struktur dari tabel `doctors`
 --
 
 CREATE TABLE `doctors` (
@@ -60,7 +60,7 @@ CREATE TABLE `doctors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `doctors`
+-- Dumping data untuk tabel `doctors`
 --
 
 INSERT INTO `doctors` (`doctor_id`, `user_id`, `spesialisasi`, `kualifikasi`, `pengalaman`) VALUES
@@ -69,7 +69,7 @@ INSERT INTO `doctors` (`doctor_id`, `user_id`, `spesialisasi`, `kualifikasi`, `p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `failed_jobs`
+-- Struktur dari tabel `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -85,7 +85,7 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jadwal_dokter`
+-- Struktur dari tabel `jadwal_dokter`
 --
 
 CREATE TABLE `jadwal_dokter` (
@@ -97,17 +97,16 @@ CREATE TABLE `jadwal_dokter` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `jadwal_dokter`
+-- Dumping data untuk tabel `jadwal_dokter`
 --
 
 INSERT INTO `jadwal_dokter` (`jadwal_id`, `doctor_id`, `hari`, `jam_mulai`, `jam_selesai`) VALUES
-(1, 1, 'senin', '17:57:22', '22:57:22'),
-(2, 1, 'senin', '14:42:00', '03:43:00');
+(2, 1, 'rabu', '12:15:00', '14:15:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jobs`
+-- Struktur dari tabel `jobs`
 --
 
 CREATE TABLE `jobs` (
@@ -123,7 +122,7 @@ CREATE TABLE `jobs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `job_batches`
+-- Struktur dari tabel `job_batches`
 --
 
 CREATE TABLE `job_batches` (
@@ -142,7 +141,30 @@ CREATE TABLE `job_batches` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Struktur dari tabel `konsultasi`
+--
+
+CREATE TABLE `konsultasi` (
+  `konsultasi_id` int(11) NOT NULL,
+  `pasien_id` int(11) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `tanggal_konsultasi` datetime NOT NULL,
+  `status` enum('terjawab','belum dijawab','reviewed') NOT NULL,
+  `keluhan_pasien` text NOT NULL,
+  `balasan_dokter` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `konsultasi`
+--
+
+INSERT INTO `konsultasi` (`konsultasi_id`, `pasien_id`, `doctor_id`, `tanggal_konsultasi`, `status`, `keluhan_pasien`, `balasan_dokter`) VALUES
+(1, 1, 1, '2024-06-22 17:46:00', 'belum dijawab', 'Testing ajukan keluhan', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -152,7 +174,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- Dumping data untuk tabel `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -162,12 +184,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2024_06_10_143526_add_username_to_users_table', 2),
 (5, '2024_06_10_144039_add_multiple_fields_to_users_table', 3),
 (6, '2024_06_10_144645_remove_id_role_from_users_table', 4),
-(7, '2024_06_10_145400_remove_email_verified_at_from_users_table', 5);
+(7, '2024_06_10_145400_remove_email_verified_at_from_users_table', 5),
+(8, '2024_06_16_005634_add_gender_to_users_table', 6);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pasien`
+-- Struktur dari tabel `pasien`
 --
 
 CREATE TABLE `pasien` (
@@ -178,17 +201,17 @@ CREATE TABLE `pasien` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `pasien`
+-- Dumping data untuk tabel `pasien`
 --
 
 INSERT INTO `pasien` (`pasien_id`, `user_id`, `riwayat_medis`, `asuransi`) VALUES
-(1, 1, 'testing update', 'test update lagi'),
+(1, 1, 'testing', 'test update lagi'),
 (2, 13, 'test', 'test');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_reset_tokens`
+-- Struktur dari tabel `password_reset_tokens`
 --
 
 CREATE TABLE `password_reset_tokens` (
@@ -200,7 +223,7 @@ CREATE TABLE `password_reset_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sessions`
+-- Struktur dari tabel `sessions`
 --
 
 CREATE TABLE `sessions` (
@@ -213,21 +236,17 @@ CREATE TABLE `sessions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `sessions`
+-- Dumping data untuk tabel `sessions`
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('8uUvh4V1jkM8yhi2BOREeky5jF60r1ZgPw9n8ccF', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiNjZSV1FUc1ZLbkpQa0dqQUo5V3RBb21HODJpa2Nyb2sxWDJ4cWdKeiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQvamFkd2FsZG9rdGVyIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1718523729),
-('l9vIzXzNUR8KCbUCNv7aDntDOH3MybfJRqnLnfZJ', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVU1IeDluYkRkUFd0dnpraDBzQkhpNzY1QVVvQlkxOXRXb1RkaGVPayI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO30=', 1718034006),
-('oCSg2WqjPkmeashm4x08F0Mtrj6YPnIcito5gqzD', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 OPR/110.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoia0xGMGViZjhGdkV2Z3ZxWVg5WWt2RUh2WWtJN1ZjNElxQmRGOFMwYiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fX0=', 1718295245),
-('PJ5TK4y0lEv3Qq2H5DH78u4w71jdFFkoMQsBmrg9', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 OPR/110.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVTdJSUhTY1JMblF1Yjc0NklSTFNnOFZvM3VNTHBoWXBNOE1SajhndiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1718027160),
-('qDJYR94ute4CEp1E8Pgv6lxhV6HEhxSwYukZWGOF', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 OPR/110.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoibUJTMG94SkZDV1o0amt2cmJ2MmJzM2xyUThMVDRSOWc0eGNUWHVraCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0NDoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2FkbWluL2Rhc2hib2FyZC9wYXNpZW4iO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo0OToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2FkbWluL2Rhc2hib2FyZC9hZGRwZW5nZ3VuYSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1718196201),
-('SAVwrZlDYWTDpbMz4ybJdwEEiAbwli9B7iYxLtSl', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 OPR/110.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoickU3ZkVDUEFSbjY5NHNDUG9FdzNBdXlJWU9xV0w2bmVMclJabmFMcCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fX0=', 1718035277);
+('5CnZVjPinubO5unx1xlb340BcMQM8Uu9840seBli', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 OPR/110.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiMTZrTWgwcjZod241bXh2anllZ21RNFFkZllHTGJISWtIN2RxUXJCViI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wYXNpZW4vZGFzaGJvYXJkIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1719053633),
+('XQHZ4WUgmVMqxEl1XAS3SVtdxKweYbxjtSaIKatx', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 OPR/110.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiSnRtRUd0Wkd1ME42YjhBQXVxUGZMekMyenRrc1hwSEZ4VnRlNmlZWSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wYXNpZW4vZGFzaGJvYXJkIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1718862745);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -246,7 +265,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `updated_at`, `username`, `jenis_kelamin`, `tanggal_lahir`, `alamat`, `no_telepon`, `tipe_pengguna`) VALUES
@@ -254,79 +273,88 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `updated_a
 (2, 'Valen Rionald', 'valenrio@ulbi.ac.id', '$2y$12$3.QVljfUiLV0dJsZsVBV2OJbwmN6UtAODId2Yzi6J1vL6.DVcqpFC', '2024-05-29 10:05:50', '2024-05-29 10:05:50', 'valenrionald', 'Laki-Laki', '2002-08-06', 'Sarijadi', '6289522910966', 'Admin'),
 (8, 'Rahma', 'rahma@email.com', '$2y$12$RvdhnoUxFbMvPtTj5G5oLOQHOvzp8XW2xoa.KZfsFLn/zMFFf14qe', '2024-05-29 21:10:04', '2024-05-29 21:10:04', 'rahma', 'Perempuan', NULL, 'Bandung', '6287758748345', 'Dokter'),
 (12, 'Richard Parker', 'richard@email.com', '$2y$12$qQTXkiX7G5pwbGxej1vYeeQBnvO7gSHM96oyqOa7XfVYPFNAsprjC', '2024-06-10 08:22:11', '2024-06-10 08:22:11', 'richard', 'Laki-Laki', '2024-06-10', 'Sarimanah', NULL, 'Dokter'),
-(13, 'Sofia the first', 'sofia@gmail.com', '$2y$12$CD7hBdJkqDmomAaGHBRUF.IJeFWajFmhEyYQQ.ul1Ay0GfWj7kCga', '2024-06-13 06:31:45', '2024-06-13 07:47:40', 'Sofiani', 'Perempuan', '2024-06-13', 'test', '09090', 'Pasien');
+(13, 'Sofia the first', 'sofia@gmail.com', '$2y$12$CD7hBdJkqDmomAaGHBRUF.IJeFWajFmhEyYQQ.ul1Ay0GfWj7kCga', '2024-06-13 06:31:45', '2024-06-13 07:47:40', 'Sofiani', 'Perempuan', '2024-06-13', 'test', '09090', 'Pasien'),
+(14, 'Jasmin Firzani Audya', 'mamahdawuh@gmail.com', '$2y$12$xGNRnkFBtaggikRVCuAbpeQMmpe881J0z06dSochRXWILjH8ckjyy', '2024-06-16 19:59:05', '2024-06-16 20:00:48', 'audy', 'Perempuan', '2024-06-17', 'bekasi', '087752400171', 'Dokter');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `cache`
+-- Indeks untuk tabel `cache`
 --
 ALTER TABLE `cache`
   ADD PRIMARY KEY (`key`);
 
 --
--- Indexes for table `cache_locks`
+-- Indeks untuk tabel `cache_locks`
 --
 ALTER TABLE `cache_locks`
   ADD PRIMARY KEY (`key`);
 
 --
--- Indexes for table `doctors`
+-- Indeks untuk tabel `doctors`
 --
 ALTER TABLE `doctors`
   ADD PRIMARY KEY (`doctor_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `failed_jobs`
+-- Indeks untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indexes for table `jadwal_dokter`
+-- Indeks untuk tabel `jadwal_dokter`
 --
 ALTER TABLE `jadwal_dokter`
   ADD PRIMARY KEY (`jadwal_id`),
   ADD KEY `doctor_id` (`doctor_id`);
 
 --
--- Indexes for table `jobs`
+-- Indeks untuk tabel `jobs`
 --
 ALTER TABLE `jobs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `jobs_queue_index` (`queue`);
 
 --
--- Indexes for table `job_batches`
+-- Indeks untuk tabel `job_batches`
 --
 ALTER TABLE `job_batches`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `migrations`
+-- Indeks untuk tabel `konsultasi`
+--
+ALTER TABLE `konsultasi`
+  ADD PRIMARY KEY (`konsultasi_id`),
+  ADD KEY `pasien_id` (`pasien_id`),
+  ADD KEY `doctor_id` (`doctor_id`);
+
+--
+-- Indeks untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `pasien`
+-- Indeks untuk tabel `pasien`
 --
 ALTER TABLE `pasien`
   ADD PRIMARY KEY (`pasien_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `password_reset_tokens`
+-- Indeks untuk tabel `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
--- Indexes for table `sessions`
+-- Indeks untuk tabel `sessions`
 --
 ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`),
@@ -334,57 +362,63 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
--- Indexes for table `users`
+-- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `doctors`
+-- AUTO_INCREMENT untuk tabel `doctors`
 --
 ALTER TABLE `doctors`
   MODIFY `doctor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `failed_jobs`
+-- AUTO_INCREMENT untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `jadwal_dokter`
+-- AUTO_INCREMENT untuk tabel `jadwal_dokter`
 --
 ALTER TABLE `jadwal_dokter`
   MODIFY `jadwal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `jobs`
+-- AUTO_INCREMENT untuk tabel `jobs`
 --
 ALTER TABLE `jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `migrations`
+-- AUTO_INCREMENT untuk tabel `konsultasi`
 --
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+ALTER TABLE `konsultasi`
+  MODIFY `konsultasi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `pasien`
+-- AUTO_INCREMENT untuk tabel `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT untuk tabel `pasien`
 --
 ALTER TABLE `pasien`
   MODIFY `pasien_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
