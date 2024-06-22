@@ -12,7 +12,7 @@ class KonsultasiController extends Controller
 	public function dashboard()
 	{
 		$consultations = Konsultasi::select(
-			'konsultasi.konsultasi_id',
+			'konsultasi_id',
 			'users_pasien.name as nama_pasien',
 			'users_dokter.name as nama_dokter',
 			'tanggal_konsultasi',
@@ -33,8 +33,10 @@ class KonsultasiController extends Controller
 
 	public function dashboardKeluhan()
 	{
+        // Ambil user_id dari user yang sedang login
 		$userId = Auth::id();
 
+        // Query untuk ambil data dari tabel pasien dan user untuk mengisi field Nama, Email dan No. Telepon
 		$pasien = DB::table('pasien')
 			->join('users', 'pasien.user_id', '=', 'users.id')
 			->where('users.tipe_pengguna', 'Pasien')
@@ -42,12 +44,14 @@ class KonsultasiController extends Controller
 			->where('users.id', $userId)
 			->first();
 
+        // Query untuk ambil data dari tabel doctors dan user untuk mengisi field Pilih Dokter
 		$doctors = DB::table('doctors')
 			->join('users', 'doctors.user_id', '=', 'users.id')
 			->where('users.tipe_pengguna', 'Dokter')
 			->select('users.name as doctor_name', 'users.email', 'users.jenis_kelamin', 'users.alamat', 'users.no_telepon', 'users.tanggal_lahir', 'doctors.doctor_id', 'doctors.spesialisasi', 'doctors.kualifikasi', 'doctors.pengalaman')
 			->get();
 
+        // Menampilkan halaman beserta data yang diambil
 		return view('pasien.dashboard-keluhan', compact('pasien', 'doctors'));
 	}
 
