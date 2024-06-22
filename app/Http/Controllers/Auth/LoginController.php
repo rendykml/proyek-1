@@ -29,7 +29,7 @@ class LoginController extends Controller
 					return redirect()->route('admin.dashboard');
 					break;
 				case "Pasien":
-					return redirect()->route('pasien.dashboard');
+					return redirect()->route('pasien.dashboard-keluhan');
 					break;
 				case "Dokter":
 					return redirect()->route('dokter.dashboard');
