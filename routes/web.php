@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\KonsultasiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {   
@@ -21,7 +22,9 @@ Route::post('login', [LoginController::class, 'login'])->middleware('guest');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 // Route untuk Pasien
-Route::get('pasien/dashboard', [PasienController::class, 'dashboard'])->name('pasien.dashboard')->middleware('auth');
+Route::get('pasien/dashboardkeluhan', [KonsultasiController::class, 'dashboardKeluhan'])->name('pasien.dashboard-keluhan')->middleware('auth');
+Route::get('pasien/dashboard', [KonsultasiController::class, 'dashboard'])->name('pasien.dashboard')->middleware('auth');
+Route::post('pasien/tambahkeluhan', [KonsultasiController::class, 'tambahKeluhan'])->name('tambahKeluhan')->middleware('auth');
 
 // Route untuk Admin
 Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth');

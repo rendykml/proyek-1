@@ -1,86 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- Content Login Start -->
+@include('pasien.header-dashboard')
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="assets/img/favicon.png" rel="icon">
-  <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+@include('pasien.navbar-dashboard')
 
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+@include('pasien.sidebar-dashboard')
+<!-- partial -->
+<div class="main-panel">
+	<div class="content-wrapper">
+		<div class="page-header">
+			<h3 class="page-title">
+				<span class="page-title-icon bg-gradient-primary text-white me-2">
+					<i class="mdi mdi-home"></i>
+				</span> Pengajuan Keluhan Pasien
+			</h3>
+			<nav aria-label="breadcrumb">
+				<ul class="breadcrumb">
+					<li class="breadcrumb-item active" aria-current="page">
+						<span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="row">
+			<div class="card-body">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 grid-margin">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">Data Keluhan</h4>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th> No </th>
+										<th> Nama Pasien </th>
+										<th> Dokter yang Menangani </th>
+										<th> Tanggal Konsultasi </th>
+										<th> Status Konsultasi </th>
+										<th> Keluhan </th>
+										<th> Balasan Dokter </th>
+										<th> Review </th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach($consultations as $index => $consultation)
+									<tr>
+										<td>{{ $index + 1 }}</td>
+										<td>{{ $consultation->nama_pasien }}</td>
+										<td>{{ $consultation->nama_dokter }}</td>
+										<td>{{ $consultation->tanggal_konsultasi }}</td>
+										<td>
+											@if ($consultation->status == 'belum dijawab')
+											<button class="btn btn-danger">Belum Dijawab</button>
+											@elseif ($consultation->status == 'terjawab')
+											<button class="btn btn-primary">Terjawab</button>
+											@endif
+										</td>
+										<td>{{ $consultation->keluhan_pasien }}</td>
+										<td>{{ $consultation->balasan_dokter }}</td>
+										<td>
+											@if ($consultation->status == 'terjawab')
+											<button class="btn btn-primary">Review</button>
+											@elseif ($consultation->status == 'belum dijawab')
+											<button class="btn btn-danger">Keluhan Anda Belum Terjawab</button>
+											@endif
+										</td>
+									</tr>
+									@endforeach
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- content-wrapper ends -->
+	<!-- partial:partials/_footer.html -->
+	<footer class="footer">
+		<div class="container-fluid d-flex justify-content-between">
+			<span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright © bootstrapdash.com 2021</span>
+			<span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
+		</div>
+	</footer>
+	<!-- partial -->
+</div>
+<!-- main-panel ends -->
+</div>
+<!-- page-body-wrapper ends -->
+</div>
 
-  <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
-	<title>Pasien Dashboard</title>
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-</head>
-
-<body>
-<section id="appointment" class="appointment section-bg">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Make an Appointment</h2>
-          <p>Silahkan tulis keluhan anda</p>
-        </div>
-
-        <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
-          <div class="row">
-            <div class="col-md-4 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Nama" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-            <div class="col-md-4 form-group mt-3 mt-md-0">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-rule="email" data-msg="Please enter a valid email">
-              <div class="validate"></div>
-            </div>
-            <div class="col-md-4 form-group mt-3 mt-md-0">
-              <input type="tel" class="form-control" name="phone" id="phone" placeholder="Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 form-group mt-3">
-              <input type="datetime" name="date" class="form-control datepicker" id="date" placeholder="Tanggal" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-          
-            <div class="col-md-4 form-group mt-3">
-              <select name="doctor" id="doctor" class="form-select">
-                <option value="">Select Doctor</option>
-                <option value="Doctor 1">Doctor 1</option>
-                <option value="Doctor 2">Doctor 2</option>
-                <option value="Doctor 3">Doctor 3</option>
-              </select>
-              <div class="validate"></div>
-            </div>
-          </div>
-
-          <div class="form-group mt-3">
-            <textarea class="form-control" name="message" rows="5" placeholder="Keluhan"></textarea>
-            <div class="validate"></div>
-          </div>
-          <div class="mb-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
-          </div>
-          <div class="text-center">
-            <button type="submit">Make an Appointment</button>
-        </form>
-        <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="btn btn-danger">Logout</button>
-            </form>
-        </div>
-      </div>
-    </section>
-</body>
-
-</html>
+@include('pasien.footer-dashboard')

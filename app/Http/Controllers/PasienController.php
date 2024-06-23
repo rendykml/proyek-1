@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Validator;
 
 class PasienController extends Controller
 {
-	public function dashboard()
-	{
-		return view('pasien.dashboard');
-	}
-
 	public function getDataPasien()
 	{
 		$pasiens = DB::table('pasien')
