@@ -23,6 +23,7 @@
 		</div>
 		<div class="row">
 			<div class="card-body">
+				<a href="{{ route('pasien.dashboard-keluhan') }}" class="btn btn-success">Tambah Keluhan</a>
 			</div>
 		</div>
 		<div class="row">
