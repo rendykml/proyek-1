@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Pasien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -38,21 +39,37 @@ class RegisterController extends Controller
 			'tanggal_lahir' => ['required', 'date'],
 			'alamat' => ['required', 'string'],
 			'no_telepon' => ['required', 'string', 'max:255'],
+			// Validasi untuk data pasien
+			'riwayat_medis' => ['required', 'string'],
+			'asuransi' => ['required', 'string'],
 		]);
 	}
 
 	protected function create(array $data)
 	{
-		return User::create([
-			'name' => $data['name'],
-			'email' => $data['email'],
-			'username' => $data['username'],
-			'password' => Hash::make($data['password']),
-			'jenis_kelamin' => $data['jenis_kelamin'],
-			'tanggal_lahir' => $data['tanggal_lahir'],
-			'alamat' => $data['alamat'],
-			'no_telepon' => $data['no_telepon'],
+		// Validasi data
+		$validatedData = $this->validator($data)->validate();
+
+		// Membuat pengguna baru di tabel users
+		$user = User::create([
+			'name' => $validatedData['name'],
+			'email' => $validatedData['email'],
+			'username' => $validatedData['username'],
+			'password' => Hash::make($validatedData['password']),
+			'jenis_kelamin' => $validatedData['jenis_kelamin'],
+			'tanggal_lahir' => $validatedData['tanggal_lahir'],
+			'alamat' => $validatedData['alamat'],
+			'no_telepon' => $validatedData['no_telepon'],
 			'tipe_pengguna' => 'Pasien',
 		]);
+
+		// Membuat entri baru di tabel pasien
+		Pasien::create([
+			'user_id' => $user->id,
+			'riwayat_medis' => $validatedData['riwayat_medis'],
+			'asuransi' => $validatedData['asuransi'],
+		]);
+
+		return $user;
 	}
 }

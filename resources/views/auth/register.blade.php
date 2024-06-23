@@ -73,6 +73,20 @@
 										@endif
 									</div>
 									<div class="mb-3">
+										<label class="form-label">Riwayat Medis</label>
+										<input class="form-control form-control-lg" type="text" id="riwayat_medis" name="riwayat_medis" value="{{ old('riwayat_medis') }}" placeholder="Masukkan Riwayat Medis" required />
+										@if ($errors->has('riwayat_medis'))
+										<span class="text-danger">{{ $errors->first('riwayat_medis') }}</span>
+										@endif
+									</div>
+									<div class="mb-3">
+										<label class="form-label">Asuransi</label>
+										<input class="form-control form-control-lg" type="text" id="asuransi" name="asuransi" value="{{ old('asuransi') }}" placeholder="Masukkan Asuransi" required />
+										@if ($errors->has('asuransi'))
+										<span class="text-danger">{{ $errors->first('asuransi') }}</span>
+										@endif
+									</div>
+									<div class="mb-3">
 										<label class="form-label">Password</label>
 										<input class="form-control form-control-lg" type="password" id="password" name="password" placeholder="Masukkan Password" />
 										@if ($errors->has('password'))
