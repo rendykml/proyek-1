@@ -5,14 +5,14 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\DokterController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KonsultasiController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {   
-    return view('index');
-});
+// Index route
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register')->middleware('guest');
 Route::post('register', [RegisterController::class, 'register'])->middleware('guest');
