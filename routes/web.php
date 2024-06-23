@@ -52,4 +52,6 @@ Route::post('admin/dashboard/addjadwal', [JadwalController::class, 'addJadwal'])
 
 // Route untuk Dokter
 Route::get('dokter/dashboard', [DokterController::class, 'dashboard'])->name('dokter.dashboard')->middleware('auth');
+Route::get('dokter/respon/{konsultasi_id}', [DokterController::class, 'respon'])->name('dokter.respon')->middleware('auth');
+Route::put('dokter/respon/{konsultasi_id}', [DokterController::class, 'responKeluhan'])->name('respon')->middleware('auth');
 

@@ -27,7 +27,7 @@
 							@method('PUT')
                       <div class="form-group">
                         <label for="name">Spesialisasi</label>
-                        <input type="text" class="form-control" id="Spesialisasi" name="Spesialisasi" value="{{ $doctors->spesialisasi }}" placeholder="Spesialisasi">
+                        <input type="text" class="form-control" id="spesialisasi" name="spesialisasi" value="{{ $doctors->spesialisasi }}" placeholder="Spesialisasi">
                         @if ($errors->has('Spesialisasi'))
 										<span class="text-danger">{{ $errors->first('Spesialis') }}</span>
 										@endif
@@ -35,7 +35,7 @@
 
                       <div class="form-group">
                         <label for="name">Kualifisasi</label>
-                        <input type="text" class="form-control" id="Kualifikasi" name="Kualifikasi" value="{{ $doctors->kualifikasi }}" placeholder="Kualifikasi">
+                        <input type="text" class="form-control" id="kualifikasi" name="kualifikasi" value="{{ $doctors->kualifikasi }}" placeholder="Kualifikasi">
                         @if ($errors->has('Kualifikasi'))
 										<span class="text-danger">{{ $errors->first('Kualifikasi') }}</span>
 										@endif
@@ -43,7 +43,7 @@
 
                       <div class="form-group">
                         <label for="name">Pengalaman</label>
-                        <input type="text" class="form-control" id="Pengalaman" name="Pengalaman" value="{{ $doctors->pengalaman}}" placeholder="Pengalaman">
+                        <input type="text" class="form-control" id="pengalaman" name="pengalaman" value="{{ $doctors->pengalaman}}" placeholder="Pengalaman">
                         @if ($errors->has('Pengalaman'))
 										<span class="text-danger">{{ $errors->first('Pengalaman') }}</span>
 										@endif
