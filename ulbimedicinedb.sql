@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Jun 2024 pada 12.59
+-- Waktu pembuatan: 23 Jun 2024 pada 10.03
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -64,7 +64,9 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`doctor_id`, `user_id`, `spesialisasi`, `kualifikasi`, `pengalaman`) VALUES
-(1, 12, 'Jantung', 'S3', '5 Tahun');
+(1, 12, 'Jantung', 'S3', '5 Tahun'),
+(2, 14, 'Paru-paru', 'S2', '5 Tahun Dipenjara'),
+(3, 8, 'Lambung', 'S2', '4 Tahun');
 
 -- --------------------------------------------------------
 
@@ -159,7 +161,8 @@ CREATE TABLE `konsultasi` (
 --
 
 INSERT INTO `konsultasi` (`konsultasi_id`, `pasien_id`, `doctor_id`, `tanggal_konsultasi`, `status`, `keluhan_pasien`, `balasan_dokter`) VALUES
-(1, 1, 1, '2024-06-22 17:46:00', 'belum dijawab', 'Testing ajukan keluhan', NULL);
+(1, 1, 1, '2024-06-22 17:46:00', 'reviewed', 'Testing ajukan keluhan', 'mati aja'),
+(2, 1, 1, '2024-06-23 14:46:00', 'belum dijawab', 'Test nambah lagi', NULL);
 
 -- --------------------------------------------------------
 
@@ -223,6 +226,26 @@ CREATE TABLE `password_reset_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `review`
+--
+
+CREATE TABLE `review` (
+  `id_review` int(11) NOT NULL,
+  `konsultasi_id` int(11) NOT NULL,
+  `rating` varchar(20) NOT NULL,
+  `pesan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `review`
+--
+
+INSERT INTO `review` (`id_review`, `konsultasi_id`, `rating`, `pesan`) VALUES
+(1, 1, '5', 'Testing review bos');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `sessions`
 --
 
@@ -240,8 +263,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('5CnZVjPinubO5unx1xlb340BcMQM8Uu9840seBli', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 OPR/110.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiMTZrTWgwcjZod241bXh2anllZ21RNFFkZllHTGJISWtIN2RxUXJCViI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wYXNpZW4vZGFzaGJvYXJkIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1719053633),
-('XQHZ4WUgmVMqxEl1XAS3SVtdxKweYbxjtSaIKatx', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 OPR/110.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiSnRtRUd0Wkd1ME42YjhBQXVxUGZMekMyenRrc1hwSEZ4VnRlNmlZWSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wYXNpZW4vZGFzaGJvYXJkIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1718862745);
+('0wcxsmzC2kKpTvR915Xc0UGcOiSYAa0cW6SRWLue', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 OPR/110.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicnJ4ZW9LZWlYU1pRZVNaUXV4Ynk2TER1RXE4MHdmZ0ZJTFA4YTE4VSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fX0=', 1719129604);
 
 -- --------------------------------------------------------
 
@@ -354,6 +376,13 @@ ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
+-- Indeks untuk tabel `review`
+--
+ALTER TABLE `review`
+  ADD PRIMARY KEY (`id_review`),
+  ADD KEY `konsultasi_id` (`konsultasi_id`);
+
+--
 -- Indeks untuk tabel `sessions`
 --
 ALTER TABLE `sessions`
@@ -376,7 +405,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `doctor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `doctor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -400,7 +429,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT untuk tabel `konsultasi`
 --
 ALTER TABLE `konsultasi`
-  MODIFY `konsultasi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `konsultasi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
@@ -413,6 +442,12 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `pasien`
   MODIFY `pasien_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `review`
+--
+ALTER TABLE `review`
+  MODIFY `id_review` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
