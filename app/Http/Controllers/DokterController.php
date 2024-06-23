@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Models\Dokter;
+use App\Models\konsultasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -12,8 +13,42 @@ class DokterController extends Controller
 	// Halaman untuk user dokter
     public function dashboard()
 	{
-		return view('dokter.dashboard');
+        $konsultasi = DB::table('konsultasi')
+		->select('konsultasi.konsultasi_id', 'konsultasi.pasien_id', 'konsultasi.doctor_id', 'konsultasi.tanggal_konsultasi', 'konsultasi.status', 'konsultasi.keluhan_pasien', 'konsultasi.balasan_dokter')
+		->get();
+
+
+		return view('dokter.dashboard', compact('konsultasi'));
 	}
+
+	public function respon($konsultasi_id)
+	{
+		$respon = DB::table('konsultasi')
+			->join('pasien', 'konsultasi.pasien_id', '=', 'pasien.pasien_id')
+			->join('users', 'users.id', '=', 'pasien.user_id')
+			->where('konsultasi.konsultasi_id', $konsultasi_id)
+			->select('users.name', 'users.jenis_kelamin', 'users.tanggal_lahir', 'users.alamat', 'users.no_telepon', 'pasien.asuransi', 'pasien.riwayat_medis', 'konsultasi.tanggal_konsultasi', 'konsultasi.status', 'konsultasi.keluhan_pasien', 'konsultasi.konsultasi_id')
+			->get();
+
+		return view('dokter.respon', compact('respon'));
+	}
+
+	public function responKeluhan(Request $request, $konsultasi_id)
+	{
+        
+		$doctors = konsultasi::findOrFail($konsultasi_id);
+		
+		// Update data pasien
+		$doctors->update([
+			'status' => 'terjawab',
+			'balasan_dokter' => $request->respon
+		]);
+		//dd($request->respon);
+
+		// Redirect ke halaman dashboard dengan pesan sukses
+		return redirect()->route('dokter.dashboard')->with('success', 'Data dokter berhasil diperbarui');
+	}
+
 
 	// Dashboard dokter di admin
 	public function dashboardDokter()
@@ -91,16 +126,16 @@ class DokterController extends Controller
 		$doctors = Dokter::findOrFail($doctors_Id);
 
 		// Validasi data tanpa user_id karena tidak perlu diubah
-		$this->validator($request->all(), $doctors_Id, true)->validate();
+		//$this->validator($request->all(), $doctors_Id, true)->validate();
 
 		// Ambil data yang diinginkan untuk diupdate
-		$data = $request->only(['Spesialisasi', 'Kualifikasi','Pengalaman']);
+		$data = $request->only(['spesialisasi', 'kualifikasi','pengalaman']);
 
 		// Update data pasien
 		$doctors->update($data);
 
 		// Redirect ke halaman dashboard dengan pesan sukses
-		return redirect()->route('admin.dasboard-dokter')->with('success', 'Data dokter berhasil diperbarui');
+		return redirect()->route('admin.dashboard-dokter')->with('success', 'Data dokter berhasil diperbarui');
 	}
 
 }
