@@ -57,15 +57,19 @@
 											<button class="btn btn-danger">Belum Dijawab</button>
 											@elseif ($consultation->status == 'terjawab')
 											<button class="btn btn-primary">Terjawab</button>
+											@elseif ($consultation->status == 'reviewed')
+											<button class="btn btn-success">Reviewed</button>
 											@endif
 										</td>
 										<td>{{ $consultation->keluhan_pasien }}</td>
 										<td>{{ $consultation->balasan_dokter }}</td>
 										<td>
 											@if ($consultation->status == 'terjawab')
-											<button class="btn btn-primary">Review</button>
+											<button class="btn btn-primary review-button" data-consultation-id="{{ $consultation->konsultasi_id }}">Review</button>
 											@elseif ($consultation->status == 'belum dijawab')
 											<button class="btn btn-danger">Keluhan Anda Belum Terjawab</button>
+											@elseif ($consultation->status == 'reviewed')
+											<button class="btn btn-success">Reviewed</button>
 											@endif
 										</td>
 									</tr>
@@ -74,6 +78,38 @@
 							</table>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="reviewModalLabel">Review Konsultasi</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="reviewForm" action="{{ route('tambahReview') }}" method="POST">
+						@csrf
+						<input type="hidden" name="konsultasi_id" id="consultationId">
+						<div class="mb-3">
+							<label for="rating" class="form-label">Rating</label>
+							<select class="form-select" name="rating" id="rating">
+								<option value="1">1 - Sangat Buruk</option>
+								<option value="2">2 - Buruk</option>
+								<option value="3">3 - Cukup</option>
+								<option value="4">4 - Baik</option>
+								<option value="5">5 - Sangat Baik</option>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label for="pesan" class="form-label">Pesan Review</label>
+							<textarea class="form-control" name="pesan" id="pesan" rows="3"></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
 				</div>
 			</div>
 		</div>

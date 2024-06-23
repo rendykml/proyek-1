@@ -17,5 +17,6 @@
     <link rel="stylesheet" href="{{asset('assets/css/style_admin.css')}}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
