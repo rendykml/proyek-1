@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\dokter;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Konsultasi;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -134,5 +136,88 @@ class AdminController extends Controller
 		$user->delete();
 
 		return redirect()->route('admin.dashboard')->with('success', 'Data pengguna berhasil dihapus');
+	}
+
+	public function showTambahKeluhanForm()
+	{
+		// Query untuk ambil data dari tabel pasien dan user untuk mengisi field Nama, Email dan No. Telepon
+		$pasien = DB::table('pasien')
+			->join('users', 'pasien.user_id', '=', 'users.id')
+			->where('users.tipe_pengguna', 'Pasien')
+			->select('users.id', 'users.name', 'users.email', 'users.jenis_kelamin', 'users.alamat', 'users.no_telepon', 'users.tanggal_lahir', 'pasien.pasien_id', 'pasien.riwayat_medis', 'pasien.asuransi')
+			->get();
+
+		// Query untuk ambil data dari tabel doctors dan user untuk mengisi field Pilih Dokter
+		$doctors = DB::table('doctors')
+			->join('users', 'doctors.user_id', '=', 'users.id')
+			->where('users.tipe_pengguna', 'Dokter')
+			->select('users.id', 'users.name as doctor_name', 'users.email', 'users.jenis_kelamin', 'users.alamat', 'users.no_telepon', 'users.tanggal_lahir', 'doctors.doctor_id', 'doctors.spesialisasi', 'doctors.kualifikasi', 'doctors.pengalaman')
+			->get();
+
+		return view('admin.tambah-keluhan', compact('pasien', 'doctors'));
+	}
+
+	public function addKeluhan(Request $request)
+	{
+		// Validasi data input
+		$request->validate([
+			'pasien_id' => 'required|integer',
+			'tanggal_konsultasi' => 'required|date',
+			'doctor_id' => 'required|integer',
+			'keluhan_pasien' => 'required|string',
+		]);
+
+		$pasien = DB::table('pasien')
+            ->where('user_id', $request->pasien_id)
+            ->select('pasien_id')
+            ->first();
+
+        // Ambil doctor_id dari tabel doctors
+        $doctor = DB::table('doctors')
+            ->where('user_id', $request->doctor_id)
+            ->select('doctor_id')
+            ->first();
+
+        // Cek apakah pasien_id dan doctor_id ditemukan
+        if (!$pasien || !$doctor) {
+            return redirect()->back()->with('error', 'Pasien atau Dokter tidak ditemukan.');
+        }
+
+		// Insert data ke dalam tabel konsultasi
+		DB::table('konsultasi')->insert([
+			'pasien_id' => $pasien->pasien_id,
+			'doctor_id' => $doctor->doctor_id,
+			'tanggal_konsultasi' => $request->tanggal_konsultasi,
+			'status' => 'belum dijawab',
+			'keluhan_pasien' => $request->keluhan_pasien,
+			'balasan_dokter' => null,
+		]);
+
+		return redirect()->route('admin.dashboard-keluhan')->with('success', 'Keluhan Pasien berhasil ditambahkan');
+	}
+
+	public function getKeluhan()
+	{
+		$consultations = Konsultasi::select(
+			'konsultasi_id',
+			'users_pasien.name as nama_pasien',
+			'users_dokter.name as nama_dokter',
+			'tanggal_konsultasi',
+			'status',
+			'keluhan_pasien',
+			'balasan_dokter'
+		)
+			->join('pasien', 'konsultasi.pasien_id', '=', 'pasien.pasien_id')
+			->join(
+				'doctors',
+				'konsultasi.doctor_id',
+				'=',
+				'doctors.doctor_id'
+			)
+			->join('users as users_pasien', 'pasien.user_id', '=', 'users_pasien.id')
+			->join('users as users_dokter', 'doctors.user_id', '=', 'users_dokter.id')
+			->get();
+
+		return view('admin.dashboard-keluhan', compact('consultations'));
 	}
 }

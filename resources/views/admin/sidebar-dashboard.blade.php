@@ -36,6 +36,12 @@
 				</a>
 			</li>
 			<li class="nav-item">
+				<a class="nav-link" href="{{ route('admin.dashboard-keluhan') }}">
+					<span class="menu-title">Keluhan Pasien</span>
+					<i class="mdi mdi-home menu-icon"></i>
+				</a>
+			</li>
+			<li class="nav-item">
 				<a class="nav-link" href="{{ route('admin.dashboard-dokter') }}">
 					<span class="menu-title">Dokter</span>
 					<i class="mdi mdi-home menu-icon"></i>

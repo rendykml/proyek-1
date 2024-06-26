@@ -54,6 +54,9 @@ Route::delete('admin/dashboard/deletepasien/{id}', [PasienController::class, 'de
 Route::get('admin/dashboard/jadwaldokter', [JadwalController::class, 'getDataJadwalDokter'])->name('admin.dashboard-jadwal')->middleware('auth');
 Route::get('admin/dashboard/addjadwal', [JadwalController::class, 'showAddJadwalForm'])->name('admin.tambah-jadwal')->middleware('auth');
 Route::post('admin/dashboard/addjadwal', [JadwalController::class, 'addJadwal'])->name('addJadwal')->middleware('auth');
+Route::get('admin/dashboard/keluhanpasien', [AdminController::class, 'getKeluhan'])->name('admin.dashboard-keluhan')->middleware('auth');
+Route::get('admin/dashboard/addkeluhan', [AdminController::class, 'showTambahKeluhanForm'])->name('admin.tambah-keluhan')->middleware('auth');
+Route::post('admin/dashboard/addkeluhan', [AdminController::class, 'addKeluhan'])->name('addKeluhan')->middleware('auth');
 
 
 // Route untuk Dokter
