@@ -5,11 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\dokter;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
+	public function home()
+	{
+		$pengguna = DB::table('users')->count();
+
+		$dokter = DB::table('users')->where('tipe_pengguna', 'Dokter')->count();
+
+		$pasien = DB::table('users')->where('tipe_pengguna', 'Pasien')->count();
+
+		return view('admin.home', compact('pengguna', 'dokter', 'pasien'));
+	}
+
 	public function dashboard()
 	{
 		$users = User::all();

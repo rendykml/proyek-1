@@ -18,6 +18,12 @@
 				</a>
 			</li>
 			<li class="nav-item">
+				<a class="nav-link" href="{{ route('admin.home') }}">
+					<span class="menu-title">Dashboard</span>
+					<i class="mdi mdi-home menu-icon"></i>
+				</a>
+			</li>
+			<li class="nav-item">
 				<a class="nav-link" href="{{ route('admin.dashboard') }}">
 					<span class="menu-title">Pengguna</span>
 					<i class="mdi mdi-home menu-icon"></i>

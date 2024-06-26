@@ -26,7 +26,7 @@ class LoginController extends Controller
 			// cek tipe pengguna
 			switch ($user->tipe_pengguna) {
 				case "Admin":
-					return redirect()->route('admin.dashboard');
+					return redirect()->route('admin.home');
 					break;
 				case "Pasien":
 					return redirect()->route('pasien.dashboard');

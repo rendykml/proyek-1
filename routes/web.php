@@ -29,6 +29,7 @@ Route::post('pasien/tambahkeluhan', [KonsultasiController::class, 'tambahKeluhan
 Route::post('pasien/tambahreview', [ReviewController::class, 'tambahReview'])->name('tambahReview')->middleware('auth');
 
 // Route untuk Admin
+Route::get('admin/home', [AdminController::class, 'home'])->name('admin.home')->middleware('auth');
 Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth');
 Route::get('admin/dashboard-dokter', [DokterController::class, 'dashboardDokter'])->name('admin.dashboard-dokter')->middleware('auth');
 Route::get('admin/dashboard/adddokter', [DokterController::class, 'showAddDokterForm'])->name('admin.tambah-dokter')->middleware('auth');
