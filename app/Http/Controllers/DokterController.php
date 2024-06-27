@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Models\Dokter;
-use App\Models\konsultasi;
+use App\Models\Konsultasi;
+use App\Models\Pasien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,8 +18,17 @@ class DokterController extends Controller
 		->select('konsultasi.konsultasi_id', 'konsultasi.pasien_id', 'konsultasi.doctor_id', 'konsultasi.tanggal_konsultasi', 'konsultasi.status', 'konsultasi.keluhan_pasien', 'konsultasi.balasan_dokter')
 		->get();
 
+		$sum_pasien = Pasien::Count('*');
+		$total_appoiment = Konsultasi::Where('status','terjawab')->Count('*');
+		$total_pesan_blm_dijawab =  Konsultasi::Where('status','belum dijawab')->Count('*');
 
-		return view('dokter.dashboard', compact('konsultasi'));
+		// var_dump($sum_pasien);die();
+		return view('dokter.dashboard', compact(
+			'konsultasi',
+			'sum_pasien',
+			'total_appoiment',
+			'total_pesan_blm_dijawab'
+		));
 	}
 
 	public function respon($konsultasi_id)

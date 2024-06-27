@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 23 Jun 2024 pada 10.03
+-- Waktu pembuatan: 24 Jun 2024 pada 04.17
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -162,7 +162,10 @@ CREATE TABLE `konsultasi` (
 
 INSERT INTO `konsultasi` (`konsultasi_id`, `pasien_id`, `doctor_id`, `tanggal_konsultasi`, `status`, `keluhan_pasien`, `balasan_dokter`) VALUES
 (1, 1, 1, '2024-06-22 17:46:00', 'reviewed', 'Testing ajukan keluhan', 'mati aja'),
-(2, 1, 1, '2024-06-23 14:46:00', 'belum dijawab', 'Test nambah lagi', NULL);
+(2, 1, 1, '2024-06-23 14:46:00', 'terjawab', 'Test nambah lagi', 'minum obat antibiotik'),
+(3, 13, 3, '2024-06-23 19:04:00', 'belum dijawab', 'lambung saya geter', NULL),
+(4, 13, 3, '2024-06-23 19:06:00', 'belum dijawab', 'lambung saya geter', NULL),
+(5, 13, 3, '2024-06-23 19:10:00', 'belum dijawab', 'lambungnya geter', NULL);
 
 -- --------------------------------------------------------
 
@@ -263,7 +266,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('0wcxsmzC2kKpTvR915Xc0UGcOiSYAa0cW6SRWLue', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 OPR/110.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicnJ4ZW9LZWlYU1pRZVNaUXV4Ynk2TER1RXE4MHdmZ0ZJTFA4YTE4VSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fX0=', 1719129604);
+('1j1EdsZugfMaZrJqTZvoRDpgAKJ4CGUL931EkzNh', 13, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 OPR/110.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiQXEwbUE2T3VZeE9IaVdJd3JZYnl0S2FzTXFiQ2RXSEU4T3FVSXdBcSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wYXNpZW4vZGFzaGJvYXJkIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTM7fQ==', 1719144674);
 
 -- --------------------------------------------------------
 
@@ -429,7 +432,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT untuk tabel `konsultasi`
 --
 ALTER TABLE `konsultasi`
-  MODIFY `konsultasi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `konsultasi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
