@@ -57,6 +57,8 @@ Route::post('admin/dashboard/addjadwal', [JadwalController::class, 'addJadwal'])
 Route::get('admin/dashboard/keluhanpasien', [AdminController::class, 'getKeluhan'])->name('admin.dashboard-keluhan')->middleware('auth');
 Route::get('admin/dashboard/addkeluhan', [AdminController::class, 'showTambahKeluhanForm'])->name('admin.tambah-keluhan')->middleware('auth');
 Route::post('admin/dashboard/addkeluhan', [AdminController::class, 'addKeluhan'])->name('addKeluhan')->middleware('auth');
+Route::get('/admin/dashboard/editkeluhan/{konsultasi_id}', [KonsultasiController::class, 'formEditKeluhan'])->name('admin.edit-keluhan')->middleware('auth');
+Route::put('/admin/dashboard/editkeluhan/{konsultasi_id}', [KonsultasiController::class, 'updateKeluhan'])->name('updateKeluhan')->middleware('auth');
 
 
 // Route untuk Dokter

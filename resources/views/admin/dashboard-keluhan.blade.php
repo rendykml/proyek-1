@@ -64,8 +64,8 @@
 										<td>{{ $consultation->keluhan_pasien }}</td>
 										<td>{{ $consultation->balasan_dokter }}</td>
 										<td>
-                                        <button class="btn btn-primary">Edit</button>
-                                        <button class="btn btn-danger">Delete</button>
+											<a href="{{ route('admin.edit-keluhan', $consultation->konsultasi_id) }}" class="btn btn-primary">Edit</a>
+											<button class="btn btn-danger">Delete</button>
 										</td>
 									</tr>
 									@endforeach

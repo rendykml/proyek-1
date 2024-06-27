@@ -94,4 +94,46 @@ class KonsultasiController extends Controller
 		// Redirect ke halaman lain atau tampilkan pesan sukses
 		return redirect()->route('pasien.dashboard')->with('success', 'Permintaan konsultasi berhasil dikirim.');
 	}
+
+	public function formEditKeluhan($id)
+	{
+		$konsultasi = DB::table('konsultasi')
+			->join('pasien', 'konsultasi.pasien_id', '=', 'pasien.pasien_id')
+			->join('users as pasien_users', 'pasien.user_id', '=', 'pasien_users.id')
+			->join('doctors', 'konsultasi.doctor_id', '=', 'doctors.doctor_id')
+			->join('users as doctor_users', 'doctors.user_id', '=', 'doctor_users.id')
+			->select('konsultasi.*', 'pasien_users.name as pasien_name', 'doctor_users.name as doctor_name', 'doctors.doctor_id', 'pasien.pasien_id')
+			->where('konsultasi.konsultasi_id', $id)
+			->first();
+
+		$doctors = DB::table('doctors')
+			->join('users', 'doctors.user_id', '=', 'users.id')
+			->select('doctors.doctor_id', 'users.name as doctor_name')
+			->get();
+
+		return view('admin.edit-keluhan', compact('konsultasi', 'doctors'));
+	}
+
+	public function updateKeluhan(Request $request, $konsultasi_id)
+	{
+		// Validasi data input
+		$request->validate([
+			'tanggal_konsultasi' => 'required|date',
+			'doctor_id' => 'required|integer',
+			'keluhan_pasien' => 'required|string',
+		]);
+
+		// Update data dalam tabel konsultasi
+		$update = DB::table('konsultasi')->where('konsultasi_id', $konsultasi_id)->update([
+			'doctor_id' => $request->doctor_id,
+			'tanggal_konsultasi' => $request->tanggal_konsultasi,
+			'keluhan_pasien' => $request->keluhan_pasien,
+		]);
+
+		if ($update) {
+			return redirect()->route('admin.dashboard-keluhan')->with('success', 'Konsultasi berhasil diperbarui.');
+		} else {
+			return redirect()->back()->with('error', 'Gagal memperbarui konsultasi.');
+		}
+	}
 }
