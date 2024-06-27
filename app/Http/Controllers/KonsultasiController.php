@@ -136,4 +136,12 @@ class KonsultasiController extends Controller
 			return redirect()->back()->with('error', 'Gagal memperbarui konsultasi.');
 		}
 	}
+
+	public function deleteKeluhan($konsultasiId)
+	{
+		$konsultasi = Konsultasi::findOrFail($konsultasiId);
+		$konsultasi->delete();
+
+		return redirect()->route('admin.dashboard-keluhan')->with('success', 'Data Keluhan Pasien berhasil dihapus');
+	}
 }

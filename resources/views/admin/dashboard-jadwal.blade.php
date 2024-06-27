@@ -37,7 +37,7 @@
 									<tr>
 										<th> No </th>
 										<th> Nama Dokter </th>
-										<th> Spesialisasi  </th>
+										<th> Spesialisasi </th>
 										<th> Hari </th>
 										<th> Tanggal dan Jam Mulai </th>
 										<th> Tanggal dan Jam Selesai </th>
@@ -54,8 +54,8 @@
 										<td>{{ $jadwal->jam_mulai }}</td>
 										<td>{{ $jadwal->jam_selesai }}</td>
 										<td>
-										<a href="{{ route('admin.edit-jadwal', $jadwal->jadwal_id) }}" class="btn btn-primary">Edit</a>
-										<form action="{{ route('deleteJadwal', $jadwal->jadwal_id) }}" method="POST" style="display:inline;">
+											<a href="{{ route('admin.edit-jadwal', $jadwal->jadwal_id) }}" class="btn btn-primary">Edit</a>
+											<form action="{{ route('deleteJadwal', $jadwal->jadwal_id) }}" method="POST" style="display:inline;">
 												@csrf
 												@method('DELETE')
 												<button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus jadwal dokter ini?')">Delete</button>

@@ -59,6 +59,7 @@ Route::get('admin/dashboard/addkeluhan', [AdminController::class, 'showTambahKel
 Route::post('admin/dashboard/addkeluhan', [AdminController::class, 'addKeluhan'])->name('addKeluhan')->middleware('auth');
 Route::get('/admin/dashboard/editkeluhan/{konsultasi_id}', [KonsultasiController::class, 'formEditKeluhan'])->name('admin.edit-keluhan')->middleware('auth');
 Route::put('/admin/dashboard/editkeluhan/{konsultasi_id}', [KonsultasiController::class, 'updateKeluhan'])->name('updateKeluhan')->middleware('auth');
+Route::delete('admin/dashboard/deletekeluhan/{id}', [KonsultasiController::class, 'deleteKeluhan'])->name('deleteKeluhan')->middleware('auth');
 
 
 // Route untuk Dokter

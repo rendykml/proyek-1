@@ -65,7 +65,11 @@
 										<td>{{ $consultation->balasan_dokter }}</td>
 										<td>
 											<a href="{{ route('admin.edit-keluhan', $consultation->konsultasi_id) }}" class="btn btn-primary">Edit</a>
-											<button class="btn btn-danger">Delete</button>
+											<form action="{{ route('deleteKeluhan', $consultation->konsultasi_id) }}" method="POST" style="display:inline;">
+												@csrf
+												@method('DELETE')
+												<button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data konsultasi keluhan pasien ini?')">Delete</button>
+											</form>
 										</td>
 									</tr>
 									@endforeach
