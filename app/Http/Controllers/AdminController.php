@@ -21,7 +21,14 @@ class AdminController extends Controller
 
 		$pasien = DB::table('users')->where('tipe_pengguna', 'Pasien')->count();
 
-		return view('admin.home', compact('pengguna', 'dokter', 'pasien'));
+		$keluhanterjawab = DB::table('konsultasi')->where('status', 'terjawab')->orWhere('status', 'reviewed')
+		->count();
+
+		$keluhanbelumdijawab = DB::table('konsultasi')->where('status', 'belum dijawab')->count();
+
+		$keluhanrated = DB::table('konsultasi')->where('status', 'reviewed')->count();
+
+		return view('admin.home', compact('pengguna', 'dokter', 'pasien', 'keluhanterjawab', 'keluhanbelumdijawab', 'keluhanrated'));
 	}
 
 	public function dashboard()
