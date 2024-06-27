@@ -12,7 +12,7 @@
 			<ul class="navbar-nav navbar-nav-right">
 				<form method="POST" action="{{ route('logout') }}">
 					@csrf
-					<button type="submit" class="dropdown-item" style="border: none; background: none; padding: 0;"><i class="mdi mdi-logout me-2 text-primary"></i> Signout</button>
+					<button type="submit" class="btn btn-danger"><i class="mdi mdi-logout me-2 text-light"></i> Signout</button>
 				</form>
 			</ul>
 			<button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
