@@ -30,6 +30,7 @@ Route::post('pasien/tambahreview', [ReviewController::class, 'tambahReview'])->n
 
 // Route untuk Admin
 Route::get('admin/home', [AdminController::class, 'home'])->name('admin.home')->middleware('auth');
+Route::get('admin/dashboard-laporan', [HomeController::class, 'dashboard_laporan'])->name('admin.dashboard-laporan')->middleware('auth');
 Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth');
 Route::get('admin/dashboard-dokter', [DokterController::class, 'dashboardDokter'])->name('admin.dashboard-dokter')->middleware('auth');
 Route::get('admin/dashboard/adddokter', [DokterController::class, 'showAddDokterForm'])->name('admin.tambah-dokter')->middleware('auth');

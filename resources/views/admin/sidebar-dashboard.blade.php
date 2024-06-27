@@ -53,5 +53,12 @@
 					<i class="mdi mdi-home menu-icon"></i>
 				</a>
 			</li>
+
+			<li class="nav-item">
+				<a class="nav-link" href="{{ route('admin.dashboard-laporan') }}">
+					<span class="menu-title">Laporan</span>
+					<i class="mdi mdi-view-list menu-icon"></i>
+				</a>
+			</li>
 		</ul>
 	</nav>
