@@ -26,13 +26,13 @@
 			<li class="nav-item">
 				<a class="nav-link" href="{{ route('admin.dashboard') }}">
 					<span class="menu-title">Pengguna</span>
-					<i class="mdi mdi-home menu-icon"></i>
+					<i class="mdi mdi-account menu-icon"></i>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="{{ route('admin.pasien-dashboard') }}">
 					<span class="menu-title">Pasien</span>
-					<i class="mdi mdi-home menu-icon"></i>
+					<i class="mdi mdi-account-box-outline menu-icon"></i>
 				</a>
 			</li>
 			<li class="nav-item">
