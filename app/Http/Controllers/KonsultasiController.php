@@ -19,13 +19,14 @@ class KonsultasiController extends Controller
 		$pasienId = Pasien::where('user_id', $userId)->value('pasien_id');
 
 		$consultations = Konsultasi::select(
-			'konsultasi_id',
+			'konsultasi.konsultasi_id',
 			'users_pasien.name as nama_pasien',
 			'users_dokter.name as nama_dokter',
-			'tanggal_konsultasi',
-			'status',
-			'keluhan_pasien',
-			'balasan_dokter'
+			'konsultasi.tanggal_konsultasi',
+			'konsultasi.status',
+			'konsultasi.keluhan_pasien',
+			'konsultasi.balasan_dokter',
+			'review.rating'
 		)
 			->join('pasien', 'konsultasi.pasien_id', '=', 'pasien.pasien_id')
 			->join(
@@ -36,6 +37,7 @@ class KonsultasiController extends Controller
 			)
 			->join('users as users_pasien', 'pasien.user_id', '=', 'users_pasien.id')
 			->join('users as users_dokter', 'doctors.user_id', '=', 'users_dokter.id')
+			->leftJoin('review', 'konsultasi.konsultasi_id', '=', 'review.konsultasi_id')
 			->where('pasien.pasien_id', $pasienId)
 			->get();
 
