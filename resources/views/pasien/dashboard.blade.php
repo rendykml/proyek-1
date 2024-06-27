@@ -42,7 +42,7 @@
 										<th> Status Konsultasi </th>
 										<th> Keluhan </th>
 										<th> Balasan Dokter </th>
-										<th> Rating </th>
+										<th> Penilaian </th>
 									</tr>
 								</thead>
 								<tbody>
@@ -69,7 +69,7 @@
 											@elseif ($consultation->status == 'belum dijawab')
 											<button class="btn btn-danger">Keluhan Anda Belum Terjawab</button>
 											@elseif ($consultation->status == 'reviewed' && $consultation->rating)
-											<button class="btn btn-success">Rating: {{ $consultation->rating }}</button>
+											<button class="btn btn-success">Nilai: {{ $consultation->rating }}</button>
 											@endif
 										</td>
 									</tr>
