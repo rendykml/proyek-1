@@ -10,6 +10,10 @@
             <div class="container">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Dashboard</h1>
+                    <a class="nav-link" href="{{ route('laporan.dashboard-laporan') }}">
+                        <span class="menu-title">Report</span>
+                        <i class="mdi mdi-home menu-icon"></i>
+                    </a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="btn btn-danger">Logout</button>

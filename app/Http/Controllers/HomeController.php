@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Dokter;
 use App\Models\Konsultasi;
 use App\Models\Pasien;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -41,6 +42,59 @@ class HomeController extends Controller
 			'total_appoiment',
 			'total_pesan_blm_dijawab',
 			'total_dokter'
+		));
+	}
+
+	public function dashboard_laporan_dokter()
+	{
+        $konsultasi = DB::table('konsultasi')
+		->select('konsultasi.konsultasi_id', 'konsultasi.pasien_id', 'konsultasi.doctor_id', 'konsultasi.tanggal_konsultasi', 'konsultasi.status', 'konsultasi.keluhan_pasien', 'konsultasi.balasan_dokter')
+		->get();
+
+		$sum_pasien = Pasien::Count('*');
+		$total_appoiment = Konsultasi::Where('status','terjawab')->Count('*');
+		$total_pesan_blm_dijawab =  Konsultasi::Where('status','belum dijawab')->Count('*');
+		$total_dokter = Dokter::Count('*');
+
+		// Mendapatkan ID pengguna yang sedang login
+		$userId = Auth::id();
+
+		// Mendapatkan pasien_id dari tabel pasien berdasarkan user_id
+		$pasienId = Pasien::where('user_id', $userId)->value('pasien_id');
+
+		$consultations = Konsultasi::select(
+			'konsultasi.konsultasi_id',
+			'users_pasien.name as nama_pasien',
+			'users_dokter.name as nama_dokter',
+			'konsultasi.tanggal_konsultasi',
+			'konsultasi.status',
+			'konsultasi.keluhan_pasien',
+			'konsultasi.balasan_dokter',
+			'review.rating'
+		)
+			->join('pasien', 'konsultasi.pasien_id', '=', 'pasien.pasien_id')
+			->join(
+				'doctors',
+				'konsultasi.doctor_id',
+				'=',
+				'doctors.doctor_id'
+			)
+			->join('users as users_pasien', 'pasien.user_id', '=', 'users_pasien.id')
+			->join('users as users_dokter', 'doctors.user_id', '=', 'users_dokter.id')
+			->leftJoin('review', 'konsultasi.konsultasi_id', '=', 'review.konsultasi_id')
+			// ->where('pasien.pasien_id', $pasienId)
+			->get();
+
+		
+
+		// var_dump($sum_pasien);die();
+		return view('laporan.dashboard-laporan', compact(
+			'konsultasi',
+			'sum_pasien',
+			'total_appoiment',
+			'total_pesan_blm_dijawab',
+			'total_dokter',
+			'consultations'
 		));
 	}
 }
