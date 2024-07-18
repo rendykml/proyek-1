@@ -33,19 +33,19 @@
                     </div>
                     <div class="col-md-4">
                         <div class="card text-white bg-success mb-3">
-                            <div class="card-header">Appointments</div>
+                            <div class="card-header">Sudah Terjawab</div>
                             <div class="card-body">
                                 <h5 class="card-title">{{ $total_appoiment }}</h5>
-                                <p class="card-text">Upcoming appointments.</p>
+                                <p class="card-text">Terjawab</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card text-white bg-warning mb-3">
-                            <div class="card-header">Pending Reports</div>
+                            <div class="card-header">Belum Terjawab</div>
                             <div class="card-body">
                                 <h5 class="card-title">{{ $total_pesan_blm_dijawab }}</h5>
-                                <p class="card-text">Reports pending review.</p>
+                                <p class="card-text">Belum Terjawab.</p>
                             </div>
                         </div>
                     </div>
@@ -90,41 +90,6 @@
                         </div>
                     </div>
                 </div>
-
-
-                <!-- Appointments Table -->
-               
-
-                <!-- Message Section -->
-                {{-- <h2>Messages</h2>
-                <div class="card mb-3">
-                    <div class="card-header">Reply to Messages</div>
-                    <div class="card-body">
-                        <form id="messageForm">
-                            <div class="form-group">
-                                <label for="messageText">Message</label>
-                                <textarea class="form-control" id="messageText" rows="3" placeholder="Type your message here..."></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Send</button>
-                        </form>
-                    </div>
-                </div> --}}
             </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    // JavaScript for form submission
-    document.getElementById('messageForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const messageText = document.getElementById('messageText').value;
-        if (messageText.trim() === '') {
-            alert('Please enter a message before sending.');
-        } else {
-            alert('Message sent: ' + messageText);
-            document.getElementById('messageText').value = '';
-        }
-    });
-</script>
 </html>

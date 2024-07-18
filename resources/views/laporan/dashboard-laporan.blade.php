@@ -34,19 +34,19 @@
                     </div>
                     <div class="col-md-4">
                         <div class="card text-white bg-success mb-3">
-                            <div class="card-header">Appointments</div>
+                            <div class="card-header">Sudah Terjawab</div>
                             <div class="card-body">
                                 <h5 class="card-title">{{ $total_appoiment }}</h5>
-                                <p class="card-text">Upcoming appointments.</p>
+                                <p class="card-text">Hasil yang sudah terjawab.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card text-white bg-warning mb-3">
-                            <div class="card-header">Pending Reports</div>
+                            <div class="card-header">Belum Terjawab</div>
                             <div class="card-body">
                                 <h5 class="card-title">{{ $total_pesan_blm_dijawab }}</h5>
-                                <p class="card-text">Reports pending review.</p>
+                                <p class="card-text"> Hasil yang belum terjawab.</p>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                     <div class="col-12 grid-margin">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Data Keluhan</h4>
+                                <h4 class="card-title">Kelola Laporan</h4>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
@@ -92,26 +92,7 @@
                                                 <td>{{ $consultation->nama_pasien }}</td>
                                                 <td>{{ $consultation->nama_dokter }}</td>
                                                 <td>{{ $consultation->tanggal_konsultasi }}</td>
-                                                {{-- <td>
-                                                    @if ($consultation->status == 'belum dijawab')
-                                                    <button class="btn btn-danger">Belum Dijawab</button>
-                                                    @elseif ($consultation->status == 'terjawab')
-                                                    <button class="btn btn-primary">Terjawab</button>
-                                                    @elseif ($consultation->status == 'reviewed')
-                                                    <button class="btn btn-success">Reviewed</button>
-                                                    @endif
-                                                </td> --}}
                                                 <td>{{ $consultation->keluhan_pasien }}</td>
-                                                {{-- <td>{{ $consultation->balasan_dokter }}</td> --}}
-                                                {{-- <td>
-                                                    @if ($consultation->status == 'terjawab')
-                                                    <button class="btn btn-primary review-button" data-consultation-id="{{ $consultation->konsultasi_id }}">Review</button>
-                                                    @elseif ($consultation->status == 'belum dijawab')
-                                                    <button class="btn btn-danger">Keluhan Anda Belum Terjawab</button>
-                                                    @elseif ($consultation->status == 'reviewed' && $consultation->rating)
-                                                    <button class="btn btn-success">Rating: {{ $consultation->rating }}</button>
-                                                    @endif
-                                                </td> --}}
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -121,38 +102,7 @@
                         </div>
                     </div>
                 </div>
-
-                
-                <!-- Message Section -->
-                {{-- <h2>Messages</h2>
-                <div class="card mb-3">
-                    <div class="card-header">Reply to Messages</div>
-                    <div class="card-body">
-                        <form id="messageForm">
-                            <div class="form-group">
-                                <label for="messageText">Message</label>
-                                <textarea class="form-control" id="messageText" rows="3" placeholder="Type your message here..."></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Send</button>
-                        </form>
-                    </div>
-                </div> --}}
             </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    // JavaScript for form submission
-    document.getElementById('messageForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const messageText = document.getElementById('messageText').value;
-        if (messageText.trim() === '') {
-            alert('Please enter a message before sending.');
-        } else {
-            alert('Message sent: ' + messageText);
-            document.getElementById('messageText').value = '';
-        }
-    });
-</script>
+
 </html>

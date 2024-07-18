@@ -15,7 +15,8 @@ class DokterController extends Controller
     public function dashboard()
 	{
         $konsultasi = DB::table('konsultasi')
-		->select('konsultasi.konsultasi_id', 'konsultasi.pasien_id', 'konsultasi.doctor_id', 'konsultasi.tanggal_konsultasi', 'konsultasi.status', 'konsultasi.keluhan_pasien', 'konsultasi.balasan_dokter')
+		->select('konsultasi.konsultasi_id', 'konsultasi.pasien_id', 'konsultasi.doctor_id',
+		 'konsultasi.tanggal_konsultasi', 'konsultasi.status', 'konsultasi.keluhan_pasien', 'konsultasi.balasan_dokter')
 		->get();
 
 		$sum_pasien = Pasien::Count('*');
@@ -37,7 +38,8 @@ class DokterController extends Controller
 			->join('pasien', 'konsultasi.pasien_id', '=', 'pasien.pasien_id')
 			->join('users', 'users.id', '=', 'pasien.user_id')
 			->where('konsultasi.konsultasi_id', $konsultasi_id)
-			->select('users.name', 'users.jenis_kelamin', 'users.tanggal_lahir', 'users.alamat', 'users.no_telepon', 'pasien.asuransi', 'pasien.riwayat_medis', 'konsultasi.tanggal_konsultasi', 'konsultasi.status', 'konsultasi.keluhan_pasien', 'konsultasi.konsultasi_id')
+			->select('users.name', 'users.jenis_kelamin', 'users.tanggal_lahir', 'users.alamat', 'users.no_telepon', 'pasien.asuransi', 
+			'pasien.riwayat_medis', 'konsultasi.tanggal_konsultasi', 'konsultasi.status', 'konsultasi.keluhan_pasien', 'konsultasi.konsultasi_id')
 			->get();
 
 		return view('dokter.respon', compact('respon'));
@@ -66,7 +68,8 @@ class DokterController extends Controller
 		$doctors = DB::table('doctors')
 			->join('users', 'doctors.user_id', '=', 'users.id')
 			->where('users.tipe_pengguna', 'Dokter')
-			->select('users.name', 'users.email', 'users.jenis_kelamin', 'users.alamat', 'users.no_telepon', 'users.tanggal_lahir', 'doctors.doctor_id', 'doctors.spesialisasi', 'doctors.kualifikasi', 'doctors.pengalaman')
+			->select('users.name', 'users.email', 'users.jenis_kelamin', 'users.alamat', 'users.no_telepon',
+			 'users.tanggal_lahir', 'doctors.doctor_id', 'doctors.spesialisasi', 'doctors.kualifikasi', 'doctors.pengalaman')
 			->get();
 
 
