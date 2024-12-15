@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Models\Dokter;
@@ -8,26 +9,69 @@ use App\Models\Konsultasi;
 use App\Models\Pasien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class DokterController extends Controller
 {
 	// Halaman untuk user dokter
-    public function dashboard()
+	public function dashboard()
 	{
-        $konsultasi = DB::table('konsultasi')
-		->select('konsultasi.konsultasi_id', 'konsultasi.pasien_id', 'konsultasi.doctor_id', 'konsultasi.tanggal_konsultasi', 'konsultasi.status', 'konsultasi.keluhan_pasien', 'konsultasi.balasan_dokter')
-		->get();
+		$user = Auth::user();
 
-		$sum_pasien = Pasien::Count('*');
-		$total_appoiment = Konsultasi::Where('status','terjawab')->Count('*');
-		$total_pesan_blm_dijawab =  Konsultasi::Where('status','belum dijawab')->Count('*');
+		$doctor = DB::table('doctors')
+			->join('users', 'doctors.user_id', '=', 'users.id')
+			->where('doctors.user_id', $user->id)
+			->select(
+				'doctors.doctor_id',
+				'doctors.spesialisasi',
+				'users.name as nama_dokter',
+				'users.tipe_pengguna'
+			)
+			->first();
 
-		// var_dump($sum_pasien);die();
+		$konsultasi = DB::table('konsultasi as k')
+			->join('pasien as p', 'k.pasien_id', '=', 'p.pasien_id')
+			->join('users as pu', 'p.user_id', '=', 'pu.id')
+			->join('doctors as d', 'k.doctor_id', '=', 'd.doctor_id')
+			->join('users as du', 'd.user_id', '=', 'du.id')
+			->where('k.doctor_id', $doctor->doctor_id) // Gunakan doctor_id yang diambil berdasarkan user login
+			->select(
+				'k.konsultasi_id',
+				'k.tanggal_konsultasi',
+				'k.status',
+				'k.keluhan_pasien',
+				'k.balasan_dokter',
+				'pu.name as nama_pasien',
+				'du.name as nama_dokter'
+			)
+			->get();
+
+		$total_terjawab = DB::table('konsultasi')
+			->where('doctor_id', $doctor->doctor_id)
+			->where('status', 'terjawab')
+			->count();
+
+		$total_reviewed = DB::table('konsultasi')
+			->where('doctor_id', $doctor->doctor_id)
+			->where('status', 'reviewed')
+			->count();
+
+		$total_pesan_blm_dijawab = DB::table('konsultasi')
+			->where('doctor_id', $doctor->doctor_id)
+			->where('status', 'belum dijawab')
+			->count();
+
+		// Statistik total pasien (tidak perlu difilter karena global)
+		$sum_pasien = Pasien::count('*');
+
 		return view('dokter.dashboard', compact(
 			'konsultasi',
 			'sum_pasien',
-			'total_appoiment',
-			'total_pesan_blm_dijawab'
+			'total_terjawab',
+			'total_pesan_blm_dijawab',
+			'total_reviewed',
+			'doctor',
+			'user'
 		));
 	}
 
@@ -45,9 +89,9 @@ class DokterController extends Controller
 
 	public function responKeluhan(Request $request, $konsultasi_id)
 	{
-        
+
 		$doctors = konsultasi::findOrFail($konsultasi_id);
-		
+
 		// Update data pasien
 		$doctors->update([
 			'status' => 'terjawab',
@@ -88,12 +132,12 @@ class DokterController extends Controller
 			'kualifikasi' => ['required', 'string', 'max:100'],
 			'pengalaman' => ['required', 'string', 'max:255'],
 		];
-	
+
 		if (!$isUpdate) {
 			// Aturan tambahan untuk create
 			$rules['user_id'] = ['required', 'integer', 'unique:pasien,user_id'];
 		}
-	
+
 		return Validator::make($data, $rules);
 	}
 
@@ -120,17 +164,17 @@ class DokterController extends Controller
 		return redirect()->route('admin.dashboard-dokter')->with('success', 'Data dokter berhasil dihapus');
 	}
 
-    public function showEditDokterForm($doctor_id)
+	public function showEditDokterForm($doctor_id)
 	{
 		$doctors = Dokter::with('user')->findOrFail($doctor_id);
 
-		$doctors= Dokter::findOrFail($doctor_id);
+		$doctors = Dokter::findOrFail($doctor_id);
 
-	
+
 		return view('admin.edit-dokter', compact('doctors'));
 	}
-    
-    public function updateDokter(Request $request, $doctors_Id)
+
+	public function updateDokter(Request $request, $doctors_Id)
 	{
 		// Temukan pasien berdasarkan ID
 		$doctors = Dokter::findOrFail($doctors_Id);
@@ -139,7 +183,7 @@ class DokterController extends Controller
 		//$this->validator($request->all(), $doctors_Id, true)->validate();
 
 		// Ambil data yang diinginkan untuk diupdate
-		$data = $request->only(['spesialisasi', 'kualifikasi','pengalaman']);
+		$data = $request->only(['spesialisasi', 'kualifikasi', 'pengalaman']);
 
 		// Update data pasien
 		$doctors->update($data);
@@ -147,5 +191,4 @@ class DokterController extends Controller
 		// Redirect ke halaman dashboard dengan pesan sukses
 		return redirect()->route('admin.dashboard-dokter')->with('success', 'Data dokter berhasil diperbarui');
 	}
-
 }
