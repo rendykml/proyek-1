@@ -32,20 +32,29 @@ Route::post('pasien/tambahreview', [ReviewController::class, 'tambahReview'])->n
 Route::get('admin/home', [AdminController::class, 'home'])->name('admin.home')->middleware('auth');
 Route::get('admin/dashboard-laporan', [HomeController::class, 'dashboard_laporan'])->name('admin.dashboard-laporan')->middleware('auth');
 Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth');
+
 Route::get('admin/dashboard-dokter', [DokterController::class, 'dashboardDokter'])->name('admin.dashboard-dokter')->middleware('auth');
+
 Route::get('admin/dashboard/adddokter', [DokterController::class, 'showAddDokterForm'])->name('admin.tambah-dokter')->middleware('auth');
 Route::post('admin/dashboard/adddokter', [DokterController::class, 'addDokter'])->name('addDokter')->middleware('auth');
+
 Route::delete('admin/dashboard/deletedokter/{doctor_id}', [DokterController::class, 'deleteDokter'])->name('deleteDokter')->middleware('auth');
+
 Route::get('admin/dashboard/editdokter/{doctor_id}', [DokterController::class, 'showEditDokterForm'])->name('admin.edit-dokter')->middleware('auth');
 Route::put('admin/dashboard/editdokters/{doctor_id}', [DokterController::class, 'updateDokter'])->name('updateDokters')->middleware('auth');
+
 Route::get('admin/dashboard/addpengguna', [AdminController::class, 'showAddPenggunaForm'])->name('admin.tambah-pengguna')->middleware('auth');
+
 Route::post('admin/dashboard/addpengguna', [AdminController::class, 'addPengguna'])->name('addPengguna')->middleware('auth');
 Route::get('admin/dashboard/pasien', [PasienController::class, 'getDataPasien'])->name('admin.pasien-dashboard')->middleware('auth');
 Route::get('admin/dashboard/addpasien', [PasienController::class, 'showAddPasienForm'])->name('admin.tambah-pasien')->middleware('auth');
 Route::post('admin/dashboard/addpasien', [PasienController::class, 'addPasien'])->name('addPasien')->middleware('auth');
+
 Route::get('admin/dashboard/editpengguna/{id}', [AdminController::class, 'showEditPenggunaForm'])->name('admin.edit-pengguna')->middleware('auth');
 Route::put('admin/dashboard/editpengguna/{id}', [AdminController::class, 'updatePengguna'])->name('updatePengguna')->middleware('auth');
+
 Route::delete('admin/dashboard/deletepengguna/{id}', [AdminController::class, 'deletePengguna'])->name('deletePengguna')->middleware('auth');
+
 Route::get('admin/dashboard/editpasien/{id}', [PasienController::class, 'showEditPasienForm'])->name('admin.edit-pasien')->middleware('auth');
 Route::put('admin/dashboard/editpasien/{id}', [PasienController::class, 'updatePasien'])->name('updatePasien')->middleware('auth');
 Route::get('admin/dashboard/editjadwal/{id}', [JadwalController::class, 'showEditjadwalForm'])->name('admin.edit-jadwal')->middleware('auth');
@@ -67,5 +76,6 @@ Route::delete('admin/dashboard/deletekeluhan/{id}', [KonsultasiController::class
 Route::get('dokter/dashboard', [DokterController::class, 'dashboard'])->name('dokter.dashboard')->middleware('auth');
 Route::get('dokter/respon/{konsultasi_id}', [DokterController::class, 'respon'])->name('dokter.respon')->middleware('auth');
 Route::put('dokter/respon/{konsultasi_id}', [DokterController::class, 'responKeluhan'])->name('respon')->middleware('auth');
+
 Route::get('dokter/dashboard-laporan', [HomeController::class, 'dashboard_laporan_dokter'])->name('laporan.dashboard-laporan')->middleware('auth');
 

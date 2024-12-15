@@ -10,7 +10,8 @@
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i
+  |Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
   <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
@@ -98,7 +99,8 @@
           <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
             <h3>Jaga Selalu Kesehatan</h3>
             <p>Selamat datang di plattform kesehatan kami.
-              Tujuan utama kami adalah menyediakan informasi kesehatan yang relavan dan bermanfaat bagi pengguna. Dengan beragam konten yang kami tampilkan, kami berharap plattform ini dapat bermanfaat sebagai sumber konsultasi kesehatan.
+              Tujuan utama kami adalah menyediakan informasi kesehatan yang relavan dan bermanfaat bagi pengguna.
+               Dengan beragam konten yang kami tampilkan, kami berharap plattform ini dapat bermanfaat sebagai sumber konsultasi kesehatan.
             </p>
           </div>
         </div>

@@ -42,19 +42,19 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="card text-white bg-success mb-3">
-                                    <div class="card-header">Appointments</div>
+                                    <div class="card-header">Sudah Terjawab</div>
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $total_appoiment }}</h5>
-                                        <p class="card-text">Upcoming appointments.</p>
+                                        <p class="card-text">Hasil yang sudah terjawab.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="card text-white bg-warning mb-3">
-                                    <div class="card-header">Pending Reports</div>
+                                    <div class="card-header">Belum Terjawab</div>
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $total_pesan_blm_dijawab }}</h5>
-                                        <p class="card-text">Reports pending review.</p>
+                                        <p class="card-text">Hasil yang belum terjawab.</p>
                                     </div>
                                 </div>
                             </div>
@@ -79,20 +79,45 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="card text-white bg-warning mb-3">
-                                    <div class="card-header">Report</div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $total_pesan_blm_dijawab }}</h5>
-                                        <p class="card-text">Reports pending review.</p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 					</div>
 				</div>
 			</div>
 		</div>
+
+        <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Laporan</h4>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th> No </th>
+                          <th> Nama Pasien </th>
+                          <th> Dokter Yang Menangani</th>
+                          <th> Tanggal Konsultasi </th>
+                          <th> Keluhan </th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                      @foreach($consultations as $index => $konsul)
+                      <tr>
+                      <td>{{ $index + 1 }}</td>
+                      <td>{{ $konsul->nama_pasien }}</td>
+                      <td>{{ $konsul->nama_dokter }}</td>
+                      <td>{{ $konsul->tanggal_konsultasi }}</td>
+                      <td>{{ $konsul->keluhan_pasien }}</td>
+                      @endforeach
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 	</div>
 	<!-- content-wrapper ends -->
 	<!-- partial:partials/_footer.html -->

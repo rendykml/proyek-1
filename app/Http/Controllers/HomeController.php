@@ -35,13 +35,37 @@ class HomeController extends Controller
 		$total_pesan_blm_dijawab =  Konsultasi::Where('status','belum dijawab')->Count('*');
 		$total_dokter = Dokter::Count('*');
 
+		$consultations = Konsultasi::select(
+			'konsultasi.konsultasi_id',
+			'users_pasien.name as nama_pasien',
+			'users_dokter.name as nama_dokter',
+			'konsultasi.tanggal_konsultasi',
+			'konsultasi.status',
+			'konsultasi.keluhan_pasien',
+			'konsultasi.balasan_dokter',
+			'review.rating'
+		)
+			->join('pasien', 'konsultasi.pasien_id', '=', 'pasien.pasien_id')
+			->join(
+				'doctors',
+				'konsultasi.doctor_id',
+				'=',
+				'doctors.doctor_id'
+			)
+			->join('users as users_pasien', 'pasien.user_id', '=', 'users_pasien.id')
+			->join('users as users_dokter', 'doctors.user_id', '=', 'users_dokter.id')
+			->leftJoin('review', 'konsultasi.konsultasi_id', '=', 'review.konsultasi_id')
+			// ->where('pasien.pasien_id', $pasienId)
+			->get();
+
 		// var_dump($sum_pasien);die();
 		return view('admin.dashboard-laporan', compact(
 			'konsultasi',
 			'sum_pasien',
 			'total_appoiment',
 			'total_pesan_blm_dijawab',
-			'total_dokter'
+			'total_dokter',
+			'consultations'
 		));
 	}
 

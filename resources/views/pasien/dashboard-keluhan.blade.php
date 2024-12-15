@@ -69,7 +69,7 @@
 				<div class="mb-3">
 					<div class="loading">Loading</div>
 					<div class="error-message"></div>
-					<div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
+					<div class="sent-message">Permintaan Anda telah berhasil dikirim. Terima kasih!</div>
 				</div>
 				<div class="text-center">
 					<button type="submit">Make an Appointment</button>

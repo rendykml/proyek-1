@@ -8,59 +8,60 @@
 </head>
 <body>
 <div class="container">
-                <h2>Konsultasi ID :{{$respon[0]->konsultasi_id}}</h2>
+                <h2>Konsultasi ID :{{$respon[0]->konsultasi_id ?? "-"}}</h2>
                 <br>
                 <table>
                 <tr>
                         <td>Nama</td>
-                        <td>: {{$respon[0]->name}}</td>
+                        <td>: {{$respon[0]->name ?? "-"}}</td>
                     </tr>
                     <tr>
                         <td>Jenis Kelamin</td>
-                        <td>:{{$respon[0]->jenis_kelamin}} </td>
+                        <td>:{{$respon[0]->jenis_kelamin ?? "-"}} </td>
                     </tr>
                     <tr>
                         <td>Tanggal lahir</td>
-                        <td>:{{$respon[0]->tanggal_lahir}} </td>
+                        <td>:{{$respon[0]->tanggal_lahir ?? "-"}} </td>
                     </tr>
                     <tr>
                         <td>Alamat</td>
-                        <td>: {{$respon[0]->alamat}}</td>
+                        <td>: {{$respon[0]->alamat ?? "-"}}</td>
                     </tr>
                     <tr>
                         <td>Phone</td>
-                        <td>: {{$respon[0]->no_telepon}}</td>
+                        <td>: {{$respon[0]->no_telepon ?? "-"}}</td>
                     </tr>
                     <tr>
                         <td>Asuransi</td>
-                        <td>: {{$respon[0]->asuransi}}</td>
+                        <td>: {{$respon[0]->asuransi?? "-"}}</td>
                     </tr>
                 </table>
                 <hr>
                 <table>
                 <tr>
                         <td>Riwayat medis</td>
-                        <td>: {{$respon[0]->riwayat_medis}}</td>
+                        <td>: {{$respon[0]->riwayat_medis ?? "-"}}</td>
                     </tr>
                     <tr>
                         <td>Tanggal Konsultasi</td>
-                        <td>: {{$respon[0]->tanggal_konsultasi}}</td>
+                        <td>: {{$respon[0]->tanggal_konsultasi ?? "-"}}</td>
                     </tr>
                     <tr>
                         <td>Status</td>
-                        <td>: {{$respon[0]->status}}</td>
+                        <td>: {{$respon[0]->status ?? "-"}}</td>
                     </tr>
                     <tr>
                         <td>Keluhan pasien</td>
-                        <td>: {{$respon[0]->keluhan_pasien}}</td>
+                        <td>: {{$respon[0]->keluhan_pasien ?? "-"}}</td>
                     </tr>
                    
                 </table>
                 <br>
                 <div class="card mb-3">
+
                     <div class="card-header">Keluhan</div>
                     <div class="card-body">
-                    <form class="forms-sample" method="POST" action="{{ route('respon', $respon[0]->konsultasi_id) }}">
+                    <form class="forms-sample" method="POST" action="{{ route('respon', $respon[0]->konsultasi_id ?? '-' ) }}">
 							@csrf
 							@method('PUT')
                             <div class="form-group">
