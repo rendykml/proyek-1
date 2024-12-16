@@ -1,95 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor Dashboard</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-            <div class="container">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
-                    <a class="nav-link" href="{{ route('laporan.dashboard-laporan') }}">
-                        <span class="menu-title">Report</span>
-                        <i class="mdi mdi-home menu-icon"></i>
-                    </a>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-danger">Logout</button>
-                    </form>
-                </div>
+<!-- Content Login Start -->
+@include('dokter.header-dashboard')
 
-                <!-- Dashboard Cards -->
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <div class="card text-white bg-primary mb-3">
-                            <div class="card-header">Total Pasien</div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $sum_pasien }}</h5>
-                                <p class="card-text">Orang</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card text-white bg-success mb-3">
-                            <div class="card-header">Sudah Terjawab</div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $total_appoiment }}</h5>
-                                <p class="card-text">Terjawab</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card text-white bg-warning mb-3">
-                            <div class="card-header">Belum Terjawab</div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $total_pesan_blm_dijawab }}</h5>
-                                <p class="card-text">Belum Terjawab.</p>
-                            </div>
-                        </div>
+@include('dokter.navbar-dashboard')
+
+@include('dokter.sidebar-dashboard')
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <!-- Dashboard Cards -->
+        <div class="row">
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-secondary card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="{{asset('assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">Total Pasien
+                        </h4>
+                        <h2 class="mb-5">{{ $sum_pasien }}</h2>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-12 grid-margin">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Appointments</h4>
-                                <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
+            </div>
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-info card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="{{asset('assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">Keluhan Terjawab
+                        </h4>
+                        <h2 class="mb-5">{{ $total_terjawab }}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-success card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="{{asset('assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">Keluhan Belum Dijawab
+                        </h4>
+                        <h2 class="mb-5">{{ $total_pesan_blm_dijawab }}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-primary card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="{{asset('assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">Keluhan reviewed
+                        </h4>
+                        <h2 class="mb-5">{{ $total_reviewed }}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-header">
+            <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-primary text-white me-2">
+                    <i class="mdi mdi-home"></i>
+                </span> Daftar Keluhan Pasien
+            </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Data Keluhan</h4>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
                                     <tr>
-                                    <th>#</th>
-                                            <th>ID</th>
-                                            <th>pasien_id</th>
-                                            <th>doctor_id</th>
-                                            <th>tanggal_konsultasi</th>
-                                            <th>status</th>
-                                            <th>keluhan_pasien</th>
-                                            <th>action</th>
+                                        <th>No</th>
+                                        <th>Nama Pasien</th>
+                                        <th>Nama Dokter</th>
+                                        <th>Tanggal Konsultasi</th>
+                                        <th>Status</th>
+                                        <th>Keluhan Pasien</th>
                                     </tr>
-                                    </thead>
-                                    <tbody>
+                                </thead>
+                                <tbody>
                                     @foreach($konsultasi as $index => $konsul)
                                     <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $konsul->konsultasi_id }}</td>
-                                    <td>{{ $konsul->pasien_id }}</td>
-                                    <td>{{ $konsul->doctor_id }}</td>
-                                    <td>{{ $konsul->tanggal_konsultasi }}</td>
-                                    <td>{{ $konsul->status }}</td>
-                                    <td>{{ $konsul->keluhan_pasien }}</td>
-                                    <td><a href="{{ route('dokter.respon', $konsul->konsultasi_id) }}" class="btn btn-success">Lihat detail</a></td>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $konsul->nama_pasien }}</td>
+                                        <td>{{ $konsul->nama_dokter }}</td>
+                                        <td>{{ $konsul->tanggal_konsultasi }}</td>
+                                        <td>{{ $konsul->status }}</td>
+                                        <td>{{ $konsul->keluhan_pasien }}</td>
+                                        <td><a href="{{ route('dokter.respon', $konsul->konsultasi_id) }}" class="btn btn-success">Lihat detail</a></td>
                                     </tr>
                                     @endforeach
-                                    </tbody>
-                                </table>
-                                </div>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-</body>
-</html>
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:partials/_footer.html -->
+    <footer class="footer">
+        <div class="container-fluid d-flex justify-content-between">
+            <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright © bootstrapdash.com 2021</span>
+            <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
+        </div>
+    </footer>
+    <!-- partial -->
+</div>
+<!-- main-panel ends -->
+</div>
+<!-- page-body-wrapper ends -->
+</div>
+
+@include('dokter.footer-dashboard')
